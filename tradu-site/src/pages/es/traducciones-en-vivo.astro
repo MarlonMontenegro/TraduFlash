@@ -1,0 +1,48 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Cta from "../../components/CallToAction.astro";
+import HowItWorks from "../../components/HowItWorks.astro";
+import Benefits from "../../components/Benefits.astro"
+import ServiceLanguagesSection from "../../components/ServiceLanguages.astro";
+import es from "../../i18n/es.json";
+
+const lang = "es";
+const t = es;
+
+import heroLiveImg from "../../assets/CTA3.jpg";
+import ctaLiveBg from "../../assets/CTA4.jpg";
+import liveBenefitsImg from "../../assets/female-interpreter-with-headset.jpg";
+
+---
+
+<Layout title="Traducciones en vivo | TraduFlash" lang={lang} t={t}>
+  <Hero
+    copy={t.liveHero}
+    imageSrc={heroLiveImg}
+    imageAlt="Traducción e interpretación en vivo"
+  />
+  <ServiceLanguagesSection lang={lang} t={t} />
+
+  <Benefits
+    title={t.liveBenefits.title}
+    items={t.liveBenefits.items}
+    imageSrc={liveBenefitsImg}
+    imageAlt="Beneficios de la interpretación en vivo"
+  />
+
+  
+  <HowItWorks  copy={t.liveHowItWorks} />
+
+
+
+  <Cta
+    copy={t.liveCta}
+    primaryHref="/es/cotizacion"
+    waNumber="50372356914"
+    waMessage="Hola, me gustaría cotizar el servicio de traducción en vivo."
+    backgroundImage={ctaLiveBg}
+  />
+
+
+</Layout>

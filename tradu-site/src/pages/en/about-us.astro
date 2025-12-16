@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import MisionVisonBlock from "../../components/aboutUs/MissionVisionBlock.astro";
+import Certifications from "../../components/aboutUs/Certifications.astro";
+import Cta from "../../components/CallToAction.astro";
+
+import t from "../../i18n/en.json";
+const lang = "en";
+
+import heroLiveImg from "../../assets/prueba1.jpg";
+import ctaBg from "../../assets/CTA1.jpg";
+
+---
+
+<Layout title="TraduFlash" lang={lang} t={t}>
+  <Hero
+    copy={t.aboutUs.aboutUsHero}
+    imageSrc={heroLiveImg}
+    imageAlt="Traducción e interpretación en vivo"
+  />
+
+<MisionVisonBlock lang={lang} t={t} />
+
+<Certifications lang={lang} t={t} />
+
+  <Cta
+    copy={t.ctaHero}
+    backgroundImage={ctaBg}
+  />
+
+</Layout>

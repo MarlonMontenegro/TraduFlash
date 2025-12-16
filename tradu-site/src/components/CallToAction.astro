@@ -1,0 +1,120 @@
+---
+import { getImage } from "astro:assets";
+
+interface CtaCopy {
+  eyebrow: string;
+  titleLine1: string;
+  titleLine2?: string;
+  subtitle?: string;
+  primaryButton: string;
+  secondaryButton: string;
+}
+
+interface Props {
+  copy: CtaCopy;
+  primaryHref?: string;
+  waNumber?: string;
+  waMessage?: string;
+
+  // Opción A: imagen local importada
+  backgroundImage?: ImageMetadata;
+}
+
+const {
+  copy,
+  primaryHref = "#contact",
+  waNumber = "50372356914",
+  waMessage = "Hola, quisiera realizar una cotización para traducir un documento.",
+  backgroundImage,
+} = Astro.props;
+
+const waText = encodeURIComponent(waMessage);
+
+// Genera una URL optimizada para background
+const bg = backgroundImage
+  ? await getImage({
+      src: backgroundImage,
+      width: 1920,
+      format: "webp",
+      quality: 80,
+    })
+  : null;
+---
+
+<style is:global>
+  .cta-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpCTA 0.7s ease-out forwards;
+  }
+  @keyframes fadeUpCTA {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<section class="relative py-24 px-4 overflow-hidden bg-[var(--background-color)]">
+  <!-- Imagen de fondo -->
+  <div
+    class="absolute inset-0 bg-cover bg-center opacity-40"
+    style={bg ? `background-image: url('${bg.src}');` : ""}
+  ></div>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+
+  <!-- CARD PRINCIPAL -->
+  <div class="relative z-10 max-w-3xl mx-auto cta-fade-up">
+    <div
+      class="rounded-3xl p-10 md:p-14 bg-white/10 backdrop-blur-xl
+             border border-white/20 shadow-[0_8px_40px_rgba(0,0,0,0.25)]
+             text-center"
+    >
+      <p class="text-sm tracking-[0.25em] uppercase text-white/80 mb-3">
+        {copy.eyebrow}
+      </p>
+
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-white mb-4">
+        {copy.titleLine1}
+        {copy.titleLine2 && (
+          <>
+            <br />
+            {copy.titleLine2}
+          </>
+        )}
+      </h1>
+
+      {copy.subtitle && (
+        <p class="text-base md:text-lg text-white/85 max-w-2xl mx-auto mb-6">
+          {copy.subtitle}
+        </p>
+      )}
+
+      <div class="mt-4 flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={primaryHref}
+          class="inline-flex items-center justify-center px-8 py-3.5
+                 rounded-full text-white font-semibold text-base
+                 bg-[var(--brand-primary)]
+                 transition-transform duration-300 hover:scale-105"
+        >
+          {copy.primaryButton}
+        </a>
+
+        <a
+          href={`https://wa.me/${waNumber}?text=${waText}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-8 py-3.5
+                 rounded-full text-white font-semibold text-base
+                 bg-[#25D366]
+                 transition-transform duration-300 hover:scale-105"
+        >
+          {copy.secondaryButton}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

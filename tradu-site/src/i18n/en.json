@@ -1,0 +1,465 @@
+{
+  "navbar": {
+    "about": "Home",
+    "contact": "About Us",
+    "button": "Get a Quote",
+    "services": "Services",
+    "liveTranslations": "Live Translations",
+    "websiteTranslations": "Website Translations"
+  },
+
+  "hero": {
+    "titleLine1": "Legal Document Translations",
+    "titleLine2": "in El Salvador",
+    "subtitle": "Licensed language professionals with experience in documents for immigration processes, studies, and work. Carefully reviewed translations with professional accuracy and attention to detail.",
+    "cta": "Get a Quote",
+    "check1": "100% personalized",
+    "check2": "Fast translations"
+  },
+
+  "features": {
+    "title": "Why choose our translations",
+    "item1": {
+      "title": "Personalized attention",
+      "desc": "We guide you throughout the process: we answer your questions and tailor your translation to the goal of your procedure."
+    },
+    "item2": {
+      "title": "Accurate legal terminology",
+      "desc": "Language professionals experienced in legal, academic, and immigration terminology. Carefully crafted translations with no ambiguities."
+    },
+    "item3": {
+      "title": "Fast and reliable delivery",
+      "desc": "Clear timelines from the start and on-time delivery so you can move forward without delays."
+    },
+    "item4": {
+      "title": "Accepted by institutions",
+      "desc": "Translations that meet common requirements requested by universities, embassies, notaries, and companies."
+    },
+    "item5": {
+      "title": "Professional seal",
+      "desc": "We include the seal and signature of licensed language professionals. If needed, we can coordinate legal support for authentications."
+    },
+    "item6": {
+      "title": "Guaranteed confidentiality",
+      "desc": "Your documents contain important information. We handle them with complete discretion and secure management."
+    }
+  },
+
+  "service": {
+    "eyebrow": "OUR SPECIALTY",
+    "titleLine1": "Experts in translating",
+    "titleLine2": "legal documents in English",
+    "description": "We translate and review legal documents originating in English, ensuring legal accuracy and compliance with Salvadoran institutional requirements. Our team consists of licensed language professionals with extensive experience in legal terminology, contracts, immigration documents, and more. We do not use AI: every translation is 100% human to ensure precision and validity.",
+    "card": {
+      "alt": "Professional legal translators in El Salvador",
+      "name": "Certified Translator Team",
+      "role": "Legal translation specialists English → Spanish",
+      "expLabel": "Experience",
+      "expValue": "+8 years",
+      "specialityLabel": "Specialty",
+      "specialityValue": "Contracts, certificates, deeds, powers of attorney",
+      "docsLabel": "Documents",
+      "docsValue": "Immigration, corporate, civil, and academic",
+      "locationLabel": "Location",
+      "locationValue": "El Salvador",
+      "cta": "View documents we translate"
+    }
+  },
+
+  "services": {
+    "eyebrow": "SERVICES",
+    "titleLine1": "Translation services",
+    "titleLine2": "tailored to your needs",
+    "subtitle": "We support you with professional document translation, live interpretation, and website translation in multiple languages, provided by licensed language professionals.",
+    "tags": {
+      "documents": "Document Translation",
+      "live": "Live Interpretation",
+      "web": "Website Translation"
+    },
+    "cards": {
+      "documents": {
+        "title": "Document translation",
+        "text": "Certificates, records, contracts, letters, resumes, immigration and academic documents. All reviewed with a legal and procedural focus."
+      },
+      "live": {
+        "title": "Live translation / interpretation",
+        "text": "Support for interviews, meetings, consular appointments, calls, or video calls where you need help in two languages."
+      },
+      "web": {
+        "title": "Website translation",
+        "text": "We adapt your website content into other languages, preserving a professional tone, message clarity, and user experience."
+      }
+    }
+  },
+
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "question": "What translation services do you offer?",
+        "answer": "We offer document translation, website and digital content translation (SEO), as well as live interpretation for meetings, events, or specific procedures."
+      },
+      {
+        "question": "Which languages do you work with?",
+        "answer": "We work with English, French, Italian, and Chinese, depending on the client's needs and the type of project."
+      },
+      {
+        "question": "Who performs the translations?",
+        "answer": "Translations are performed by licensed language professionals with academic training and experience in document translation and formal communication."
+      },
+      {
+        "question": "How long does a translation take?",
+        "answer": "Delivery time depends on the type and volume of the document. Most standard translations are delivered within 2 to 3 business days. We also offer urgent services upon coordination."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept payment via bank transfer or payment upon delivery. A prior deposit is required to begin any service."
+      },
+      {
+        "question": "Is a deposit required to start the translation?",
+        "answer": "Yes. To begin the document translation process, website translation (SEO), or live interpretation, a deposit is required as service confirmation."
+      },
+      {
+        "question": "Where are translated documents delivered?",
+        "answer": "Documents are delivered at our offices located in Colonia Flor Blanca, San Salvador. We can also send scanned documents in digital format if requested by the client."
+      },
+      {
+        "question": "Can I send my documents digitally?",
+        "answer": "Yes. You can send us your documents as a clear scan or PDF for review and quotation."
+      },
+      {
+        "question": "How do I request a quote?",
+        "answer": "You can send us your document or the link to the website you want translated. We review it and send you a personalized, no-obligation quote."
+      }
+    ]
+  },
+
+  "ctaHero": {
+    "eyebrow": "READY TO GET STARTED?",
+    "titleLine1": "Send your document today",
+    "titleLine2": "and receive a quote within hours",
+    "subtitle": "Share your file as a PDF or a clear photo. We review your document and send you the price, timeline, and next steps, with no obligation.",
+    "primaryButton": "I want my quote",
+    "secondaryButton": "Message us on WhatsApp"
+  },
+
+  "footer": {
+    "description": "Professional translation services for documents, websites, and live interpretation, provided by licensed language professionals.",
+    "socialsTitle": "Social media",
+    "linksTitle": "Quick links",
+    "linkHome": "Home",
+    "linkServices": "Services",
+    "linkAbout": "About us",
+    "linkContact": "Contact",
+    "linkTerms": "Terms and conditions",
+    "contactTitle": "Contact",
+    "contactPhoneLabel": "Phone",
+    "contactEmailLabel": "Email",
+    "whatsappCta": "Message us on WhatsApp",
+    "rights": "All rights reserved",
+    "designedBy": "Designed and developed by"
+  },
+
+  "liveHero": {
+    "titleLine1": "Connect without language barriers",
+    "titleLine2": "",
+    "subtitle": "We support you in real time during supplier meetings, important meetings, and calls, with professional interpretation in English and Chinese.",
+    "cta": "Request interpretation",
+    "check1": "English and Mandarin Chinese",
+    "check2": "With native-level professionals"
+  },
+
+  "liveCta": {
+    "eyebrow": "DO YOU HAVE AN INTERVIEW OR APPOINTMENT?",
+    "titleLine1": "Book your live interpreter",
+    "titleLine2": "for your next meeting",
+    "subtitle": "Tell us the date, the language, and the type of meeting. We confirm availability and pricing before scheduling.",
+    "primaryButton": "Request interpretation",
+    "secondaryButton": "Chat on WhatsApp"
+  },
+
+  "servicePage": {
+    "useCases": "When to use this service",
+    "languages": "Available languages",
+    "steps": "How it works",
+    "benefits": "Service benefits"
+  },
+
+  "liveLanguages": {
+    "eyebrow": "Available languages",
+    "title": "Connecting cultures",
+    "subtitle": "Professional interpretation services in the most in-demand languages for procedures, studies, and business.",
+    "cards": [
+      {
+        "countryCode": "US",
+        "shortCode": "EN",
+        "languageName": "English",
+        "variant": "Native English interpretation",
+        "specialtiesTitle": "Specialties:",
+        "specialties": [
+          "Job interviews and business meetings",
+          "Consular appointments and immigration procedures",
+          "Academic meetings and presentations"
+        ]
+      },
+      {
+        "countryCode": "CN",
+        "shortCode": "ZH",
+        "languageName": "Mandarin Chinese",
+        "variant": "Mandarin for business and international meetings",
+        "specialtiesTitle": "Specialties:",
+        "specialties": [
+          "Trade and negotiation with suppliers",
+          "Corporate meetings",
+          "Support for business procedures and documentation"
+        ]
+      }
+    ]
+  },
+
+  "liveHowItWorks": {
+    "title": "How it works",
+    "subtitle": "A simple process and professional support at every stage of your appointment or meeting.",
+    "steps": [
+      {
+        "title": "Book your service",
+        "description": "Share the date, time, language, and meeting type. We confirm availability."
+      },
+      {
+        "title": "Interpreter confirmation",
+        "description": "We assign a professional interpreter with experience in the type of procedure or meeting you will have."
+      },
+      {
+        "title": "Live connection",
+        "description": "We join via video call or phone call and support you throughout the entire conversation."
+      },
+      {
+        "title": "Ongoing support",
+        "description": "If you need clarifications before or after the meeting, we help ensure everything is clear."
+      }
+    ]
+  },
+
+  "webHero": {
+    "titleLine1": "Expand your website",
+    "titleLine2": "to the international market",
+    "subtitle": "We adapt your website content into other languages while preserving your tone, message, and style. Increase your global reach with clear, natural, SEO-optimized translations.",
+    "cta": "Request website translation",
+    "check1": "SEO-optimized",
+    "check2": "Adapted to your brand"
+  },
+
+  "webCta": {
+    "eyebrow": "READY TO GO GLOBAL?",
+    "titleLine1": "Translate your website",
+    "titleLine2": "and reach new markets",
+    "subtitle": "We adapt your content into other languages while maintaining your tone, style, and branding. Clear, natural, SEO-optimized translations.",
+    "primaryButton": "I want to translate my site",
+    "secondaryButton": "Chat on WhatsApp"
+  },
+
+  "webHowItWorks": {
+    "title": "How your website translation works",
+    "subtitle": "A clear, professional process with support at every step to ensure your site is ready for the international market.",
+    "steps": [
+      {
+        "title": "Share your website with us",
+        "description": "Send us your website URL or the site files. We review the structure, content volume, and required languages."
+      },
+      {
+        "title": "Receive a quote and estimated timeline",
+        "description": "We analyze your website and send an exact price along with the delivery timeline and project scope."
+      },
+      {
+        "title": "Upfront payment to get started",
+        "description": "We begin the translation once the service is confirmed and the initial project payment is completed."
+      },
+      {
+        "title": "Final delivery + revisions",
+        "description": "We deliver the translation ready to publish. Includes 2 rounds of revisions to ensure tone, style, and accuracy."
+      }
+    ]
+  },
+
+  "webBenefits": {
+    "title": "Benefits of Translating Your Website",
+    "items": [
+      {
+        "title": "Increase your reach",
+        "description": "Connect with millions of users who prefer content in their own language."
+      },
+      {
+        "title": "Better international SEO",
+        "description": "Optimized translations to improve your global search ranking."
+      },
+      {
+        "title": "Higher conversion",
+        "description": "Users understand your message better when it is in their native language."
+      },
+      {
+        "title": "Professional credibility",
+        "description": "Content translated by experts in digital communication."
+      }
+    ]
+  },
+
+  "liveBenefits": {
+    "title": "Benefits of live translation and interpretation",
+    "items": [
+      {
+        "title": "Clear communication",
+        "description": "Avoid misunderstandings during important meetings or interviews."
+      },
+      {
+        "title": "Expert professionals",
+        "description": "Interpreters with native-level proficiency in English and Chinese."
+      },
+      {
+        "title": "Full support",
+        "description": "We are with you before, during, and after the meeting."
+      },
+      {
+        "title": "Greater confidence",
+        "description": "Speak confidently in any situation or procedure."
+      }
+    ]
+  },
+
+  "aboutUs": {
+    "aboutUsHero": {
+      "titleLine1": "",
+      "titleLine2": "Committed to Excellence",
+      "subtitle": "We are a team of licensed language professionals with extensive experience and international certifications, committed to delivering precise translations of exceptional quality.",
+      "cta": "Get a Quote",
+      "check1": "Specialized service",
+      "check2": "Quality guaranteed"
+    },
+
+    "MisionVisionBlock": {
+      "mission": {
+        "title": "Our Mission",
+        "text": "To provide exceptionally accurate translation services that exceed our clients’ expectations. We are committed to preserving the essence and tone of each document, ensuring that every word becomes an open door between cultures and languages."
+      },
+
+      "vision": {
+        "title": "Our Vision",
+        "text": "To be recognized leaders in professional translation solutions, enabling global communication and connecting diverse communities through linguistic excellence. We envision a world where language barriers do not limit opportunities."
+      }
+    },
+
+    "team": {
+      "title": "Our Team",
+      "text": "We have professional translators licensed in languages from accredited universities. Each team member brings hands-on experience across sectors such as legal, technical, medical, and business. Our dedication to excellence ensures reliable and accurate translations for your most important projects."
+    },
+
+    "certifications": {
+      "title": "International Certifications",
+      "description": "Our team holds certifications from prestigious international organizations, validating our expertise and exceptional language proficiency. Each team member keeps their credentials up to date.",
+      "items": [
+        {
+          "name": "TOEFL",
+          "issuer": "Educational Testing Service (ETS)",
+          "fullName": "Test of English as a Foreign Language",
+          "notes": "Globally recognized to validate academic and professional English proficiency.",
+          "score": "100+/120"
+        },
+        {
+          "name": "TOEIC",
+          "issuer": "Educational Testing Service (ETS)",
+          "fullName": "Test of English for International Communication",
+          "notes": "Certification focused on business and professional English.",
+          "score": "900+/990"
+        },
+        {
+          "name": "IELTS",
+          "issuer": "British Council, IDP, Cambridge",
+          "fullName": "International English Language Testing System",
+          "notes": "International standard for higher education, migration, and professional employment.",
+          "score": "Band 8.0+/9.0"
+        },
+        {
+          "name": "DALF / DELF",
+          "issuer": "French Ministry of Education",
+          "fullName": "Diplôme d'Études en Langue Française",
+          "notes": "Official certification of French language proficiency.",
+          "level": "C1 or higher"
+        },
+        {
+          "name": "DELE",
+          "issuer": "Instituto Cervantes",
+          "fullName": "Diploma of Spanish as a Foreign Language",
+          "notes": "Official certification from Instituto Cervantes.",
+          "level": "C1 or higher"
+        },
+        {
+          "name": "Cambridge English",
+          "issuer": "University of Cambridge",
+          "fullName": "Cambridge Proficiency / Advanced Certificates",
+          "notes": "Top-level academic and professional certifications.",
+          "level": "CPE - C2"
+        }
+      ]
+    }
+  },
+  "quoteCalculator": {
+    "eyebrow": "Quote Calculator",
+    "titleLine1": "Calculate your translation",
+    "titleLine2": "in seconds",
+    "description": "Fill in your document details and get an estimated price. At the end, you can send the quote via WhatsApp and share your file.",
+
+    "form": {
+      "nameLabel": "Your name",
+      "namePlaceholder": "Type your name",
+
+      "docTypeLabel": "Document type",
+      "docTypeOptions": {
+        "visa": "Visa documents",
+        "scholarship": "Scholarship / study documents",
+        "civil": "Civil documents (certificates, records, etc.)",
+        "work": "Work / business documents",
+        "other": "Other (I will describe on WhatsApp)"
+      },
+
+      "sourceLanguageLabel": "Source language",
+      "targetLanguageLabel": "Target language",
+
+      "languageNames": {
+        "es": "Spanish",
+        "en": "English",
+        "fr": "French",
+        "it": "Italian",
+        "zh": "Chinese"
+      },
+
+      "pagesLabel": "Number of pages (sides with text)",
+      "pagesHelp": "Count each side with content as one page. Example: a sheet written on one side = 1 page; a sheet written on both sides = 2 pages. If your document includes stamps, tables, or complex scans, the final price may vary.",
+
+      "extrasLabel": "Additional options",
+      "expressLabel": "Express delivery",
+      "expressNote": "( +20% on the total )"
+    },
+
+    "summary": {
+      "estimatedTitle": "This price is an estimate.",
+      "estimatedText": "Final amounts may vary depending on document complexity, technical terminology, formatting, and the requirements of the requesting institution.",
+
+      "cardTitle": "Your quote",
+      "documentLabel": "Document",
+      "languagesLabel": "Languages",
+      "optionsLabel": "Options",
+      "noExtras": "No add-ons",
+
+      "detailTemplate": "{pages} page(s) × ${price} (excl. VAT)",
+
+      "subtotalLabel": "Subtotal",
+      "discountLabel": "Discount",
+      "vatLabel": "VAT (13%)",
+      "totalLabel": "Estimated total"
+    },
+
+    "whatsapp": {
+      "button": "Send quote via WhatsApp",
+      "note": "When sending the quote via WhatsApp, you can share your document as a PDF or photo to confirm the final price."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import QuoteForm from "../../components/QuoteForm.astro";
+import HowItWorks from "../../components/HowItWorks.astro";
+import Testimonial from "../../components/Testimonial.astro";
+import Faq from "../../components/FaqSection.astro";
+
+
+import t from "../../i18n/es.json";
+
+
+const lang = "es";
+---
+
+<Layout title="Cotización de traducción" lang={lang} t={t}>
+  <QuoteForm lang={lang} t={t} />
+  <Testimonial lang={lang} t={t} />
+  <Faq lang={lang} t={t} />
+
+</Layout>

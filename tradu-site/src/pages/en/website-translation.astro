@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Cta from "../../components/CallToAction.astro";
+import HowItWorks from "../../components/HowItWorks.astro";
+import Benefits from "../../components/Benefits.astro";
+import en from "../../i18n/en.json";
+
+import heroImg from "../../assets/HERO2.jpg";
+import ctaBg from "../../assets/CTA3.jpg";
+import benefitsImg from "../../assets/website-translation-corporate-benefits.jpg";
+
+const lang = "en";
+const t = en;
+---
+
+
+<Layout title="Traducciones en vivo | TraduFlash" lang={lang} t={t}>
+  <Hero
+    copy={t.webHero}
+    imageSrc={heroImg}
+    imageAlt="Traducción profesional de documentos legales"
+  />
+
+<Benefits
+  title={t.webBenefits.title}
+  items={t.webBenefits.items}
+  imageSrc={benefitsImg}
+  imageAlt="Beneficios de traducir tu página web"
+/>
+
+
+    <HowItWorks
+    copy={t.webHowItWorks}
+    />
+
+  <Cta
+    copy={t.ctaHero}
+    backgroundImage={ctaBg}
+  />
+
+</Layout>

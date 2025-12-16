@@ -1,0 +1,202 @@
+---
+import { Image } from "astro:assets";
+
+interface HeroCopy {
+  titleLine1: string;
+  titleLine2?: string;
+  subtitle: string;
+  cta: string;
+  check1?: string;
+  check2?: string;
+}
+
+interface Props {
+  copy: HeroCopy;
+  imageSrc: ImageMetadata;
+  imageAlt: string;
+}
+
+const { copy, imageSrc, imageAlt } = Astro.props;
+---
+
+<style is:global>
+  .hero-fade-up,
+  .hero-fade-img {
+    opacity: 0;
+  }
+
+  .hero-fade-up {
+    transform: translateY(16px);
+  }
+
+  .hero-fade-img {
+    transform: translateX(20px) scale(0.97);
+  }
+
+  .hero-fade-up.is-visible {
+    animation: heroFadeUp 0.7s ease-out forwards;
+  }
+
+  .hero-fade-img.is-visible {
+    animation: heroFadeImg 0.8s ease-out forwards 0.15s;
+  }
+
+  @keyframes heroFadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroFadeImg {
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+</style>
+
+<section
+  class="relative py-20 md:py-28 px-4
+         bg-[var(--background-color)] overflow-hidden"
+>
+  <!-- BG DOTS -->
+  <div
+    class="absolute inset-0 z-0
+           [background-size:18px_18px]
+           [background-image:radial-gradient(#d8d8d8_1px,transparent_1px)]
+           opacity-60"
+  ></div>
+
+  <!-- CONTENEDOR -->
+  <div
+    class="relative z-10 max-w-6xl mx-auto
+           flex flex-col lg:flex-row
+           items-center gap-10 lg:gap-16"
+  >
+    <!-- TEXTO -->
+    <div
+      class="w-full lg:w-[55%]
+             text-center lg:text-left
+             max-w-xl lg:max-w-2xl mx-auto
+             hero-fade-up"
+    >
+      <h1
+        class="text-[2.4rem] md:text-[3.3rem] lg:text-[3.2rem]
+               font-bold tracking-tight leading-[1.30]
+               text-[var(--brand-black)]"
+      >
+        {copy.titleLine1}
+        {copy.titleLine2 && (
+          <>
+            <br class="hidden md:block" />
+            {copy.titleLine2}
+          </>
+        )}
+      </h1>
+
+      <p
+        class="mt-6 text-[1rem] md:text-[1.15rem]
+               text-slate-700 leading-[1.65]
+               max-w-lg mx-auto lg:mx-0"
+      >
+        {copy.subtitle}
+      </p>
+
+      <div class="mt-9 flex justify-center lg:justify-start">
+        <a
+          href="#contact"
+          class="inline-flex items-center justify-center px-10 py-3.5
+                 rounded-full text-sm md:text-base font-semibold
+                 bg-[var(--brand-primary)] text-white
+                 transition-transform duration-200 ease-out
+                 hover:scale-[1.04]
+                 active:scale-[0.98]"
+        >
+          {copy.cta}
+        </a>
+      </div>
+
+      {(copy.check1 || copy.check2) && (
+        <div
+          class="mt-8 flex flex-col md:flex-row gap-3 md:gap-4
+                 justify-center lg:justify-start items-center"
+        >
+          {copy.check1 && (
+            <div
+              class="inline-flex items-center gap-2 rounded-full px-4 py-2
+                     bg-[var(--brand-primary)]/10"
+            >
+              <span
+                class="flex items-center justify-center w-5 h-5 rounded-full
+                       bg-[var(--brand-blue)] text-white text-xs"
+              >
+                ✔
+              </span>
+              <span class="text-sm md:text-base font-medium text-[var(--brand-black)]">
+                {copy.check1}
+              </span>
+            </div>
+          )}
+
+          {copy.check2 && (
+            <div
+              class="inline-flex items-center gap-2 rounded-full px-4 py-2
+                     bg-[var(--brand-primary)]/10"
+            >
+              <span
+                class="flex items-center justify-center w-5 h-5 rounded-full
+                       bg-[var(--brand-blue)] text-white text-xs"
+              >
+                ✔
+              </span>
+              <span class="text-sm md:text-base font-medium text-[var(--brand-black)]">
+                {copy.check2}
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+
+    <!-- IMAGEN -->
+    <div class="w-full lg:w-1/2 flex justify-center lg:justify-end hero-fade-img">
+      <div
+        class="relative w-full max-w-2xl
+               rounded-3xl bg-white shadow-xl border border-slate-200
+               overflow-hidden"
+      >
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          class="w-full h-full object-cover"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          format="webp"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!("IntersectionObserver" in window)) return;
+
+      const elements = document.querySelectorAll(
+        ".hero-fade-up, .hero-fade-img"
+      );
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            entry.target.classList.toggle("is-visible", entry.isIntersecting);
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      elements.forEach((el) => observer.observe(el));
+    });
+  </script>
+</section>

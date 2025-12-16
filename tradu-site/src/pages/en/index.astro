@@ -1,0 +1,29 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Features from "../../components/Features.astro";
+import Cta from "../../components/CallToAction.astro";
+import Services from "../../components/Services.astro";
+import Faq from "../../components/FaqSection.astro";
+import t from "../../i18n/en.json";
+
+import heroImg from "../../assets/prueba2.jpg";
+import ctaBg from "../../assets/CTA1.jpg";
+
+const lang = "en";
+---
+
+<Layout title="TraduFlash" lang={lang} t={t}>
+  <Hero
+    copy={t.hero}
+    imageSrc={heroImg}
+    imageAlt="Traducción profesional de documentos legales"
+  />
+  <Features lang={lang} t={t} />
+  <Cta
+    copy={t.ctaHero}
+    backgroundImage={ctaBg}
+  />
+  <Services lang={lang} t={t} />
+  <Faq lang={lang} t={t} />
+</Layout>

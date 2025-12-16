@@ -1,0 +1,8 @@
+:root {
+  --background-color: #fff;
+  --brand-primary: #c1121f; /* naranja normal */
+  --brand-primary-dark: #780000; /* hover naranja más oscuro */
+  --brand-black: #0a2540; /* negro textos */
+  --brand-text: #ffffff; /* blanco */
+  --brand-blue: #014f86;
+}

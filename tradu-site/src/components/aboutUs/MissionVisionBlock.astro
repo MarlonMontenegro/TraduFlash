@@ -1,0 +1,96 @@
+---
+interface Block {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  lang: "en" | "es";
+  t: any;
+}
+
+const { lang, t } = Astro.props;
+
+const mission = t.aboutUs.MisionVisionBlock.mission as Block;
+const vision = t.aboutUs.MisionVisionBlock.vision as Block;
+---
+
+<style is:global>
+  .mv-fade-up {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: all 0.7s ease-out;
+  }
+
+  .mv-fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<section
+  class="relative py-16 md:py-20 px-4 bg-[var(--background-color)] overflow-hidden"
+>
+  <!-- Fondo de puntos -->
+  <div
+    class="absolute inset-0 z-0 opacity-[0.2]
+           [background-size:18px_18px]
+           [background-image:radial-gradient(#d8d8d8_1px,transparent_1px)]"
+  ></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <div class="grid gap-8 md:gap-10 md:grid-cols-2">
+      <!-- MISIÓN -->
+      <article
+        class="mv-fade-up bg-white rounded-3xl border border-slate-200 shadow-sm
+               px-6 py-7 md:px-8 md:py-9
+               transition-all duration-200 ease-out
+               hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand-primary)]/35"
+      >
+        <h2 class="text-xl md:text-2xl font-bold text-[var(--brand-black)] mb-3">
+          {mission.title}
+        </h2>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          {mission.text}
+        </p>
+      </article>
+
+      <!-- VISIÓN -->
+      <article
+        class="mv-fade-up bg-white rounded-3xl border border-slate-200 shadow-sm
+               px-6 py-7 md:px-8 md:py-9
+               transition-all duration-200 ease-out
+               hover:-translate-y-1 hover:shadow-lg hover:border-[var(--brand-primary)]/35"
+      >
+        <h2 class="text-xl md:text-2xl font-bold text-[var(--brand-black)] mb-3">
+          {vision.title}
+        </h2>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          {vision.text}
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          } else {
+            // para que la animación se repita al volver a entrar
+            entry.target.classList.remove("is-visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document
+      .querySelectorAll(".mv-fade-up")
+      .forEach((el) => observer.observe(el));
+  }
+</script>

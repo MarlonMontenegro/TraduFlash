@@ -1,0 +1,620 @@
+---
+interface Props {
+  lang?: "es" | "en";
+  t: any;
+}
+
+const { lang = "es", t } = Astro.props;
+
+const copy = t.quoteCalculator;
+
+const docTypeValues = ["visa", "scholarship", "civil", "work", "other"] as const;
+const languageValues = ["es", "en", "fr", "it", "zh"] as const;
+---
+
+<section
+  id="cotizador"
+  class="relative overflow-hidden py-16 md:py-20"
+>
+  <div
+    class="pointer-events-none absolute inset-0 -z-10
+           [background-size:20px_20px]
+           [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]
+           opacity-45"
+  ></div>
+
+  <div class="max-w-6xl mx-auto px-4 md:px-6 space-y-6 md:space-y-8">
+
+    <!-- HEADER / MINI HERO LIMPIO -->
+    <header
+      class="relative max-w-3xl mx-auto mb-12 md:mb-14
+             px-6 py-10 md:py-12
+             text-center rounded-3xl"
+    >
+      <div
+        class="inline-flex items-center justify-center
+               px-4 py-1.5 rounded-full
+               bg-[var(--brand-primary)]/10
+               text-[0.75rem] md:text-xs font-semibold tracking-[0.18em] uppercase"
+      >
+        {copy.eyebrow}
+      </div>
+
+      <h2
+        class="mt-5 text-[2rem] md:text-[2.8rem] lg:text-[3rem]
+               font-bold leading-[1.1] text-[var(--brand-black)]"
+      >
+        {copy.titleLine1}
+        <span class="block text-[var(--brand-primary)]">
+          {copy.titleLine2}
+        </span>
+      </h2>
+
+      <p
+        class="mt-4 text-sm md:text-base text-slate-600
+               max-w-2xl mx-auto leading-relaxed"
+      >
+        {copy.description}
+      </p>
+    </header>
+
+    <div
+      class="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-start"
+    >
+      <!-- Columna izquierda: formulario -->
+      <div
+        class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 space-y-6"
+      >
+        <div class="space-y-2">
+          <label
+            for="nombre"
+            class="block text-sm font-medium text-[var(--brand-black)]"
+          >
+            {copy.form.nameLabel}
+          </label>
+          <input
+            id="nombre"
+            type="text"
+            placeholder={copy.form.namePlaceholder}
+            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm md:text-base
+                   focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+          />
+        </div>
+
+        <div class="space-y-2">
+          <label
+            for="tipo-doc"
+            class="block text-sm font-medium text-[var(--brand-black)]"
+          >
+            {copy.form.docTypeLabel}
+          </label>
+          <select
+            id="tipo-doc"
+            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm md:text-base
+                   focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+          >
+            {docTypeValues.map((v) => (
+              <option value={v}>
+                {copy.form.docTypeOptions[v]}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="space-y-2">
+            <label
+              for="idioma-origen"
+              class="block text-sm font-medium text-[var(--brand-black)]"
+            >
+              {copy.form.sourceLanguageLabel}
+            </label>
+            <select
+              id="idioma-origen"
+              class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm md:text-base
+                     focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+            >
+              {languageValues.map((v) => (
+                <option value={v}>
+                  {copy.form.languageNames[v]}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div class="space-y-2">
+            <label
+              for="idioma-destino"
+              class="block text-sm font-medium text-[var(--brand-black)]"
+            >
+              {copy.form.targetLanguageLabel}
+            </label>
+            <select
+              id="idioma-destino"
+              class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm md:text-base
+                     focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+            >
+              {languageValues.map((v) => (
+                <option value={v}>
+                  {copy.form.languageNames[v]}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label
+            for="paginas"
+            class="block text-sm font-medium text-[var(--brand-black)]"
+          >
+            {copy.form.pagesLabel}
+          </label>
+
+          <div class="flex items-center gap-3 max-w-xs">
+            <button
+              type="button"
+              id="menos-paginas"
+              class="h-10 w-10 rounded-lg border border-slate-300 flex items-center justify-center
+                     text-lg font-semibold text-slate-600 hover:bg-slate-50"
+              aria-label="minus"
+            >
+              -
+            </button>
+
+            <input
+              id="paginas"
+              type="number"
+              min="1"
+              max="200"
+              value="1"
+              class="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-center text-sm md:text-base
+                     focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+            />
+
+            <button
+              type="button"
+              id="mas-paginas"
+              class="h-10 w-10 rounded-lg border border-slate-300 flex items-center justify-center
+                     text-lg font-semibold text-slate-600 hover:bg-slate-50"
+              aria-label="plus"
+            >
+              +
+            </button>
+          </div>
+
+          <p class="text-xs text-slate-500">
+            {copy.form.pagesHelp}
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-sm font-medium text-[var(--brand-black)]">
+            {copy.form.extrasLabel}
+          </p>
+          <div class="space-y-2 text-sm">
+            <label class="flex items-center gap-2">
+              <input
+                id="extra-express"
+                type="checkbox"
+                class="h-4 w-4 rounded border-slate-300 text-[var(--brand-primary)]"
+              />
+              <span>
+                {copy.form.expressLabel}
+                <span class="text-slate-500"> {copy.form.expressNote}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: resumen -->
+      <div class="space-y-4">
+        <div
+          class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 md:p-5 flex items-start gap-3"
+        >
+          <input
+            id="acepta-estimado"
+            type="checkbox"
+            class="mt-1 h-4 w-4 rounded border-slate-300 text-[var(--brand-primary)]"
+          />
+          <div class="text-sm text-slate-700">
+            <p class="font-semibold text-[var(--brand-black)]">
+              {copy.summary.estimatedTitle}
+            </p>
+            <p class="mt-1 text-slate-600 text-xs md:text-sm">
+              {copy.summary.estimatedText}
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div
+            class="px-5 py-4 border-b border-slate-100 text-xs md:text-sm
+                   font-semibold tracking-[0.16em] uppercase text-slate-500"
+          >
+            {copy.summary.cardTitle}
+          </div>
+
+          <div class="px-5 py-4 md:py-5 space-y-4">
+            <dl class="space-y-3 text-sm md:text-[0.95rem]">
+              <div class="flex items-center justify-between gap-4 pb-2 border-b border-slate-100">
+                <dt class="text-slate-500 text-xs uppercase tracking-[0.14em]">
+                  {copy.summary.documentLabel}
+                </dt>
+                <dd id="resumen-paginas" class="font-semibold text-[var(--brand-black)]">
+                  1 pág.
+                </dd>
+              </div>
+
+              <div class="flex items-center justify-between gap-4 pb-2 border-b border-slate-100">
+                <dt class="text-slate-500 text-xs uppercase tracking-[0.14em]">
+                  {copy.summary.languagesLabel}
+                </dt>
+                <dd id="resumen-idiomas" class="font-semibold text-[var(--brand-black)] text-right">
+                  Español → Inglés
+                </dd>
+              </div>
+
+              <div class="flex items-center justify-between gap-4">
+                <dt class="text-slate-500 text-xs uppercase tracking-[0.14em]">
+                  {copy.summary.optionsLabel}
+                </dt>
+                <dd id="resumen-extras" class="text-xs md:text-sm text-slate-600 text-right">
+                  {copy.summary.noExtras}
+                </dd>
+              </div>
+            </dl>
+
+            <p id="resumen-detalle" class="mt-2 text-xs md:text-sm text-slate-500">
+              1 página × $20.00 (sin IVA)
+            </p>
+
+            <div class="mt-3 space-y-1 text-xs md:text-sm text-slate-600">
+              <div class="flex items-center justify-between">
+                <span>{copy.summary.subtotalLabel}</span>
+                <span id="resumen-subtotal">$20.00</span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-xs md:text-sm text-slate-600">{copy.summary.discountLabel}</span>
+                <span id="resumen-descuento" class="text-xs md:text-sm text-[var(--brand-black)]">
+                  -$0.00
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span>{copy.summary.vatLabel}</span>
+                <span id="resumen-iva">$2.60</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
+              <div>
+                <p class="text-xs uppercase tracking-[0.16em] text-slate-500">
+                  {copy.summary.totalLabel}
+                </p>
+              </div>
+              <p
+                id="resumen-total"
+                class="text-2xl md:text-3xl font-extrabold text-[var(--brand-black)] leading-tight"
+              >
+                $22.60
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <button
+          id="btn-whatsapp"
+          type="button"
+          disabled
+          class="w-full inline-flex items-center justify-center gap-2 rounded-2xl
+                 bg-[#16a34a] text-white font-semibold text-sm md:text-base
+                 py-3.5 md:py-4 disabled:opacity-50 disabled:cursor-not-allowed
+                 transition-transform duration-150 hover:scale-[1.01] active:scale-[0.97]"
+        >
+          <span>{copy.whatsapp.button}</span>
+        </button>
+
+        <p class="text-[0.7rem] text-slate-500 text-center">
+          {copy.whatsapp.note}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script is:inline define:vars={{ i18n: copy.script }}>
+  if (typeof window !== "undefined") {
+    const state = {
+      tipo: "visa",
+      origen: "es",
+      destino: "en",
+      paginas: 1,
+      express: false,
+      sello: false,
+      nombre: "",
+      fechaLimite: "",
+      aceptaEstimado: false,
+    };
+
+    const PRICE_CONFIG = {
+      basePorHoja: {
+        es: {
+          en: 20,
+          fr: 20,
+          it: 20,
+          zh: 30,
+        },
+        otros: 30,
+      },
+      recargoExpress: 0.2,
+      iva: 0.13,
+      descuentos: {
+        cincoHojas: 0.1,
+        diezHojas: 0.15,
+      },
+    };
+
+    const tipoDocEl = document.querySelector("#tipo-doc");
+    const idiomaOrigenEl = document.querySelector("#idioma-origen");
+    const idiomaDestinoEl = document.querySelector("#idioma-destino");
+    const paginasEl = document.querySelector("#paginas");
+    const menosPaginasEl = document.querySelector("#menos-paginas");
+    const masPaginasEl = document.querySelector("#mas-paginas");
+    const fechaLimiteEl = document.querySelector("#fecha-limite");
+    const expressEl = document.querySelector("#extra-express");
+    const selloEl = document.querySelector("#extra-sello");
+    const nombreEl = document.querySelector("#nombre");
+    const aceptaEstimadoEl = document.querySelector("#acepta-estimado");
+    const btnWhatsappEl = document.querySelector("#btn-whatsapp");
+
+    const resumenPaginasEl = document.querySelector("#resumen-paginas");
+    const resumenIdiomasEl = document.querySelector("#resumen-idiomas");
+    const resumenExtrasEl = document.querySelector("#resumen-extras");
+    const resumenDetalleEl = document.querySelector("#resumen-detalle");
+    const resumenTotalEl = document.querySelector("#resumen-total");
+    const resumenSubtotalEl = document.querySelector("#resumen-subtotal");
+    const resumenDescuentoEl = document.querySelector("#resumen-descuento");
+    const resumenIvaEl = document.querySelector("#resumen-iva");
+
+    function getIdiomaLabel(code) {
+      return i18n?.languageMap?.[code] ?? String(code || "").toUpperCase();
+    }
+
+    function getSheetUnit(n) {
+      return n === 1 ? i18n.units.sheetSingular : i18n.units.sheetPlural;
+    }
+
+    function calcularPrecioBasePorHoja(origen, destino) {
+      if (origen === "es" && destino !== "es") {
+        return (
+          PRICE_CONFIG.basePorHoja.es[destino] ?? PRICE_CONFIG.basePorHoja.otros
+        );
+      }
+      if (destino === "es" && origen !== "es") {
+        return (
+          PRICE_CONFIG.basePorHoja.es[origen] ?? PRICE_CONFIG.basePorHoja.otros
+        );
+      }
+      return PRICE_CONFIG.basePorHoja.otros;
+    }
+
+    function actualizarResumen() {
+      const paginas = Math.max(1, Number(state.paginas) || 1);
+      const basePorHoja = calcularPrecioBasePorHoja(state.origen, state.destino);
+
+      let subtotalBase = paginas * basePorHoja;
+
+      let descuento = 0;
+      let descuentoPorc = 0;
+
+      if (paginas > 10) {
+        descuentoPorc = PRICE_CONFIG.descuentos.diezHojas;
+      } else if (paginas > 5) {
+        descuentoPorc = PRICE_CONFIG.descuentos.cincoHojas;
+      }
+
+      if (descuentoPorc > 0) {
+        descuento = subtotalBase * descuentoPorc;
+      }
+
+      let subtotalTrasDescuento = subtotalBase - descuento;
+
+      const extrasSeleccionados = [];
+
+      if (state.express) {
+        const extraExpress = subtotalTrasDescuento * PRICE_CONFIG.recargoExpress;
+        subtotalTrasDescuento += extraExpress;
+        extrasSeleccionados.push(i18n.labels.expressExtra);
+      }
+
+      if (state.sello) {
+        extrasSeleccionados.push(i18n.labels.sealExtra);
+      }
+
+      const iva = subtotalTrasDescuento * PRICE_CONFIG.iva;
+      const total = subtotalTrasDescuento + iva;
+
+      if (resumenSubtotalEl) resumenSubtotalEl.textContent = `$${subtotalBase.toFixed(2)}`;
+      if (resumenDescuentoEl) resumenDescuentoEl.textContent = `-$${descuento.toFixed(2)}`;
+      if (resumenIvaEl) resumenIvaEl.textContent = `$${iva.toFixed(2)}`;
+
+      if (resumenPaginasEl) {
+        resumenPaginasEl.textContent = `${paginas} ${getSheetUnit(paginas)}`;
+      }
+
+      if (resumenIdiomasEl) {
+        resumenIdiomasEl.textContent = `${getIdiomaLabel(state.origen)} → ${getIdiomaLabel(state.destino)}`;
+      }
+
+      if (resumenExtrasEl) {
+        resumenExtrasEl.textContent =
+          extrasSeleccionados.length === 0 ? i18n.labels.noExtras : extrasSeleccionados.join(" · ");
+      }
+
+      const unit = getSheetUnit(paginas);
+      const detalleBase = `${paginas} ${unit} × $${basePorHoja.toFixed(2)} (${i18n.labels.noVat})`;
+
+      if (resumenDetalleEl) {
+        if (descuentoPorc > 0) {
+          const porcentajeLabel =
+            descuentoPorc === 0.15 ? i18n.labels.volumeDiscount15 : i18n.labels.volumeDiscount10;
+
+          resumenDetalleEl.innerHTML = `
+            ${detalleBase}<br />
+            <span
+              class="inline-flex mt-2 items-center rounded-full
+                     bg-emerald-50 text-emerald-700 px-2 py-0.5
+                     text-[0.7rem] font-semibold"
+            >
+              ${i18n.labels.volumeDiscountApplied}: ${porcentajeLabel}
+            </span>
+          `;
+        } else {
+          resumenDetalleEl.textContent = detalleBase;
+        }
+      }
+
+      if (resumenTotalEl) resumenTotalEl.textContent = `$${total.toFixed(2)}`;
+      if (btnWhatsappEl) btnWhatsappEl.disabled = !state.aceptaEstimado || !state.nombre.trim();
+    }
+
+    tipoDocEl?.addEventListener("change", () => {
+      state.tipo = tipoDocEl.value;
+    });
+
+    idiomaOrigenEl?.addEventListener("change", () => {
+      state.origen = idiomaOrigenEl.value;
+      actualizarResumen();
+    });
+
+    idiomaDestinoEl?.addEventListener("change", () => {
+      state.destino = idiomaDestinoEl.value;
+      actualizarResumen();
+    });
+
+    paginasEl?.addEventListener("input", () => {
+      state.paginas = paginasEl.value;
+      actualizarResumen();
+    });
+
+    menosPaginasEl?.addEventListener("click", () => {
+      const current = Math.max(1, Number(paginasEl.value) || 1);
+      paginasEl.value = String(Math.max(1, current - 1));
+      state.paginas = paginasEl.value;
+      actualizarResumen();
+    });
+
+    masPaginasEl?.addEventListener("click", () => {
+      const current = Math.max(1, Number(paginasEl.value) || 1);
+      paginasEl.value = String(current + 1);
+      state.paginas = paginasEl.value;
+      actualizarResumen();
+    });
+
+    fechaLimiteEl?.addEventListener("change", () => {
+      state.fechaLimite = fechaLimiteEl.value;
+    });
+
+    expressEl?.addEventListener("change", () => {
+      state.express = expressEl.checked;
+      actualizarResumen();
+    });
+
+    selloEl?.addEventListener("change", () => {
+      state.sello = selloEl.checked;
+      actualizarResumen();
+    });
+
+    nombreEl?.addEventListener("input", () => {
+      state.nombre = nombreEl.value;
+      actualizarResumen();
+    });
+
+    aceptaEstimadoEl?.addEventListener("change", () => {
+      state.aceptaEstimado = aceptaEstimadoEl.checked;
+      actualizarResumen();
+    });
+
+    btnWhatsappEl?.addEventListener("click", () => {
+      if (!state.nombre.trim()) return;
+
+      const paginas = Math.max(1, Number(state.paginas) || 1);
+      const basePorHoja = calcularPrecioBasePorHoja(state.origen, state.destino);
+
+      let subtotalBase = paginas * basePorHoja;
+      let descuento = 0;
+      let descuentoPorc = 0;
+
+      if (paginas > 10) {
+        descuentoPorc = PRICE_CONFIG.descuentos.diezHojas;
+      } else if (paginas > 5) {
+        descuentoPorc = PRICE_CONFIG.descuentos.cincoHojas;
+      }
+
+      if (descuentoPorc > 0) {
+        descuento = subtotalBase * descuentoPorc;
+      }
+
+      let subtotalTrasDescuento = subtotalBase - descuento;
+
+      const extras = [];
+      if (state.express) {
+        const extraExpress = subtotalTrasDescuento * PRICE_CONFIG.recargoExpress;
+        subtotalTrasDescuento += extraExpress;
+        extras.push(i18n.labels.expressExtra);
+      }
+
+      if (state.sello) {
+        extras.push(i18n.labels.sealExtra);
+      }
+
+      const iva = subtotalTrasDescuento * PRICE_CONFIG.iva;
+      const total = subtotalTrasDescuento + iva;
+
+      const idiomaTexto = `${getIdiomaLabel(state.origen)} → ${getIdiomaLabel(state.destino)}`;
+      const numeroWhatsapp = "50372356914";
+
+      const porcentajeLabel =
+        descuentoPorc === 0.15 ? i18n.labels.volumeDiscount15 : i18n.labels.volumeDiscount10;
+
+      const descuentoLinea =
+        descuentoPorc > 0
+          ? `- ${i18n.whatsapp.fields.discountByVolume}: ${porcentajeLabel} → -$${descuento.toFixed(2)} USD\n`
+          : "";
+
+      const extrasLinea = extras.length > 0 ? extras.join(", ") : i18n.labels.noExtras;
+      const deadlineText = state.fechaLimite || i18n.whatsapp.fields.deadlineNotSpecified;
+
+      const docTypeLabel = i18n.whatsapp.docTypes?.[state.tipo] ?? state.tipo;
+
+      const texto = `
+${i18n.whatsapp.greeting.replace("{name}", state.nombre)}
+
+${i18n.whatsapp.docDataTitle}
+- ${i18n.whatsapp.fields.docType}: ${docTypeLabel}
+- ${i18n.whatsapp.fields.languages}: ${idiomaTexto}
+- ${i18n.whatsapp.fields.sheets}: ${paginas}
+
+${i18n.whatsapp.quoteDetailTitle}
+- ${i18n.whatsapp.fields.baseSubtotal}: $${subtotalBase.toFixed(2)} USD
+${descuentoLinea}- ${i18n.whatsapp.fields.subtotalAfter}: $${subtotalTrasDescuento.toFixed(2)} USD
+- ${i18n.whatsapp.fields.vat}: $${iva.toFixed(2)} USD
+- ${i18n.whatsapp.fields.total}: $${total.toFixed(2)} USD
+
+${i18n.whatsapp.fields.extras}: ${extrasLinea}
+${i18n.whatsapp.fields.deadline}: ${deadlineText}
+
+${i18n.whatsapp.understandEstimate}
+      `.trim();
+
+      const url = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(texto)}`;
+      window.open(url, "_blank");
+    });
+
+    actualizarResumen();
+  }
+</script>

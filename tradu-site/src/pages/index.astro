@@ -1,0 +1,18 @@
+---
+const defaultLang = "es"; 
+const target = `/${defaultLang}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+  </head>
+  <body class="bg-[var(--background-color)] flex items-center justify-center min-h-screen">
+    <p class="text-slate-700">
+      Redirecting to <a href={target} class="text-[#004732] underline">{target}</a>…
+    </p>
+  </body>
+</html>
