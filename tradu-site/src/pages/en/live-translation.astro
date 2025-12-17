@@ -16,11 +16,17 @@ import liveBenefitsImg from "../../assets/benefits/professional-live-interpreter
 
 ---
 
-<Layout title="Traducciones en vivo | TraduFlash" lang={lang} t={t}>
+<Layout
+  title="Live Interpretation Services | TraduFlash"
+  description="Professional live interpretation services for meetings, events, and conferences. Experienced interpreters in Spanish and English."
+  lang={lang}
+  canonical="https://traduflashsv.com/en/live-translation"
+  t={t}
+>
   <Hero
     copy={t.liveHero}
     imageSrc={heroLiveImg}
-    imageAlt="Traducción e interpretación en vivo"
+    imageAlt="Professional live interpretation services"
   />
   <ServiceLanguagesSection lang={lang} t={t} />
 
@@ -28,7 +34,7 @@ import liveBenefitsImg from "../../assets/benefits/professional-live-interpreter
     title={t.liveBenefits.title}
     items={t.liveBenefits.items}
     imageSrc={liveBenefitsImg}
-    imageAlt="Beneficios de la interpretación en vivo"
+    imageAlt="Benefits of professional live interpretation"
   />
 
   
@@ -38,9 +44,9 @@ import liveBenefitsImg from "../../assets/benefits/professional-live-interpreter
 
   <Cta
     copy={t.liveCta}
-    primaryHref="/es/cotizacion"
+    primaryHref="/en/quote"
     waNumber="50372356914"
-    waMessage="Hola, me gustaría cotizar el servicio de traducción en vivo."
+    waMessage="Hello, I would like to request a quote for live interpretation services."
     backgroundImage={ctaLiveBg}
   />
 
