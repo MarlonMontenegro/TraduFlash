@@ -432,7 +432,7 @@
       },
 
       "pagesLabel": "Number of pages (sides with text)",
-      "pagesHelp": "Count each side with content as one page. Example: a sheet written on one side = 1 page; a sheet written on both sides = 2 pages. If your document includes stamps, tables, or complex scans, the final price may vary.",
+      "pagesHelp": "Count each side with content as one page. Example: one-sided sheet = 1 page; double-sided sheet = 2 pages. If your document includes stamps, tables, or complex scans, the final price may vary.",
 
       "extrasLabel": "Additional options",
       "expressLabel": "Express delivery",
@@ -460,6 +460,89 @@
     "whatsapp": {
       "button": "Send quote via WhatsApp",
       "note": "When sending the quote via WhatsApp, you can share your document as a PDF or photo to confirm the final price."
+    },
+
+    "script": {
+      "languageMap": {
+        "es": "Spanish",
+        "en": "English",
+        "fr": "French",
+        "it": "Italian",
+        "zh": "Chinese"
+      },
+
+      "units": {
+        "sheetSingular": "page",
+        "sheetPlural": "pages"
+      },
+
+      "labels": {
+        "noExtras": "No add-ons",
+        "expressExtra": "Express delivery (+20%)",
+        "sealExtra": "Additional seal (quoted separately)",
+        "noVat": "excl. VAT",
+        "volumeDiscountApplied": "Volume discount applied",
+        "volumeDiscount10": "10%",
+        "volumeDiscount15": "15%"
+      },
+
+      "whatsapp": {
+        "greeting": "Hi, my name is {name} and I’d like to request a translation quote.",
+        "docDataTitle": "Document details:",
+        "quoteDetailTitle": "Quote breakdown:",
+        "understandEstimate": "I understand this price is only an estimate and may change after you review the document.",
+
+        "fields": {
+          "docType": "Document type",
+          "languages": "Languages",
+          "sheets": "Number of pages",
+          "baseSubtotal": "Base subtotal",
+          "discountByVolume": "Volume discount",
+          "subtotalAfter": "Subtotal after discount and add-ons",
+          "vat": "VAT (13%)",
+          "total": "Estimated total",
+          "extras": "Selected add-ons",
+          "deadline": "Desired deadline",
+          "deadlineNotSpecified": "Not specified"
+        },
+
+        "docTypes": {
+          "visa": "Visa documents",
+          "scholarship": "Scholarship / study documents",
+          "civil": "Civil documents",
+          "work": "Work / business documents",
+          "other": "Other"
+        }
+      }
     }
+  },
+
+  "testimonials": {
+    "eyebrow": "Verified Reviews",
+    "title": "What our clients say about our translations",
+    "subtitle": "Over 1,000 documents translated and accepted by universities, embassies, and legal institutions. Accuracy, speed, and reliability are what our clients highlight the most.",
+    "indicatorAria": "View testimonial {n}",
+    "items": [
+      {
+        "name": "Juan M.",
+        "role": "Scholarship student",
+        "text": "They delivered the translation very fast and with no mistakes. I was able to submit my documents on time for my scholarship."
+      },
+      {
+        "name": "María P.",
+        "role": "UK visa process",
+        "text": "The UK embassy accepted my documents with no issues. The process was clear and professional."
+      },
+      {
+        "name": "Carlos R.",
+        "role": "Corporate documents",
+        "text": "Very careful translation with legal terminology. You can tell it was reviewed by professionals."
+      },
+      {
+        "name": "Sofía L.",
+        "role": "Master’s application",
+        "text": "I used their translations for a graduate program abroad. Everything arrived on time and with the required seals."
+      }
+    ]
   }
 }

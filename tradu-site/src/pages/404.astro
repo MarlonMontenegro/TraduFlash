@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import tES from "../i18n/es.json";
+import tEN from "../i18n/en.json";
+
+// idioma por defecto
+const lang = "es";
+const t = tES;
+---
+
+<Layout title="Página no encontrada" lang={lang} t={t}>
+  <section class="max-w-3xl mx-auto px-6 py-20 text-center">
+    <h1 class="text-5xl font-bold mb-6">404</h1>
+
+    <p class="text-lg mb-8">
+      La página que buscas no existe o fue movida.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="/es"
+        class="px-6 py-3 rounded-full font-semibold bg-slate-900 text-white"
+      >
+        Ir al inicio (ES)
+      </a>
+
+      <a
+        href="/en"
+        class="px-6 py-3 rounded-full font-semibold border border-slate-300"
+      >
+        Go to homepage (EN)
+      </a>
+    </div>
+  </section>
+</Layout>

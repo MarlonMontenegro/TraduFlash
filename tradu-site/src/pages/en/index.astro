@@ -7,8 +7,8 @@ import Services from "../../components/Services.astro";
 import Faq from "../../components/FaqSection.astro";
 import t from "../../i18n/en.json";
 
-import heroImg from "../../assets/prueba2.jpg";
-import ctaBg from "../../assets/CTA1.jpg";
+import heroImg from "../../assets/hero/hero-home.jpg";
+import ctaBg from "../../assets/cta/cta-1.jpg";
 
 const lang = "en";
 ---
@@ -20,10 +20,11 @@ const lang = "en";
     imageAlt="Traducción profesional de documentos legales"
   />
   <Features lang={lang} t={t} />
-  <Cta
-    copy={t.ctaHero}
-    backgroundImage={ctaBg}
-  />
+<Cta
+  lang={lang}
+  copy={t.ctaHero}
+  backgroundImage={ctaBg}
+/>
   <Services lang={lang} t={t} />
   <Faq lang={lang} t={t} />
 </Layout>

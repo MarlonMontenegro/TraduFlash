@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { MessageCircle } from "lucide-astro";
 
 interface HeroCopy {
   titleLine1: string;
@@ -103,19 +104,23 @@ const { copy, imageSrc, imageAlt } = Astro.props;
         {copy.subtitle}
       </p>
 
-      <div class="mt-9 flex justify-center lg:justify-start">
-        <a
-          href="#contact"
-          class="inline-flex items-center justify-center px-10 py-3.5
-                 rounded-full text-sm md:text-base font-semibold
-                 bg-[var(--brand-primary)] text-white
-                 transition-transform duration-200 ease-out
-                 hover:scale-[1.04]
-                 active:scale-[0.98]"
-        >
-          {copy.cta}
-        </a>
-      </div>
+<div class="mt-9 flex justify-center lg:justify-start">
+  <a
+    href="https://wa.me/50372356914"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-10 py-3.5
+           rounded-full text-sm md:text-base font-semibold
+           bg-[#25D366] text-white
+           transition-transform duration-200 ease-out
+           hover:scale-[1.04]
+           active:scale-[0.98]"
+  >
+    <MessageCircle class="h-5 w-5" />
+    <span>{copy.cta}</span>
+  </a>
+</div>
+
 
       {(copy.check1 || copy.check2) && (
         <div

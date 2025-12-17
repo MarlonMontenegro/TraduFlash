@@ -11,26 +11,33 @@ interface CtaCopy {
 }
 
 interface Props {
+  lang: "es" | "en";
   copy: CtaCopy;
-  primaryHref?: string;
   waNumber?: string;
-  waMessage?: string;
 
-  // Opción A: imagen local importada
+  // Imagen opcional de fondo
   backgroundImage?: ImageMetadata;
 }
 
 const {
+  lang,
   copy,
-  primaryHref = "#contact",
   waNumber = "50372356914",
-  waMessage = "Hola, quisiera realizar una cotización para traducir un documento.",
   backgroundImage,
 } = Astro.props;
 
+// 👉 Ruta correcta al QuoteForm (NO al componente)
+const primaryHref = lang === "es" ? "/es/cotizacion" : "/en/quote";
+
+// 👉 Mensaje WhatsApp según idioma
+const waMessage =
+  lang === "es"
+    ? "Hola, quiero cotizar algo."
+    : "Hi, I’d like to request a quote.";
+
 const waText = encodeURIComponent(waMessage);
 
-// Genera una URL optimizada para background
+// Imagen de fondo optimizada
 const bg = backgroundImage
   ? await getImage({
       src: backgroundImage,
@@ -40,13 +47,13 @@ const bg = backgroundImage
     })
   : null;
 ---
-
 <style is:global>
   .cta-fade-up {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeUpCTA 0.7s ease-out forwards;
   }
+
   @keyframes fadeUpCTA {
     to {
       opacity: 1;
@@ -65,7 +72,7 @@ const bg = backgroundImage
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
-  <!-- CARD PRINCIPAL -->
+  <!-- Card -->
   <div class="relative z-10 max-w-3xl mx-auto cta-fade-up">
     <div
       class="rounded-3xl p-10 md:p-14 bg-white/10 backdrop-blur-xl
@@ -76,7 +83,7 @@ const bg = backgroundImage
         {copy.eyebrow}
       </p>
 
-      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-white mb-4">
+      <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white mb-4">
         {copy.titleLine1}
         {copy.titleLine2 && (
           <>
@@ -84,7 +91,7 @@ const bg = backgroundImage
             {copy.titleLine2}
           </>
         )}
-      </h1>
+      </h2>
 
       {copy.subtitle && (
         <p class="text-base md:text-lg text-white/85 max-w-2xl mx-auto mb-6">
@@ -92,7 +99,8 @@ const bg = backgroundImage
         </p>
       )}
 
-      <div class="mt-4 flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+        <!-- CTA Principal -->
         <a
           href={primaryHref}
           class="inline-flex items-center justify-center px-8 py-3.5
@@ -103,6 +111,7 @@ const bg = backgroundImage
           {copy.primaryButton}
         </a>
 
+        <!-- WhatsApp -->
         <a
           href={`https://wa.me/${waNumber}?text=${waText}`}
           target="_blank"

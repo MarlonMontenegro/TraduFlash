@@ -327,50 +327,49 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
 
 
 <script is:inline define:vars={{ i18n: copy.script }}>
-  if (typeof window !== "undefined") {
+  const initQuoteForm = () => {
+    // Evita re-inits duplicados (cuando navegas /es -> /en sin recargar)
+    const key = "__quoteFormInit";
+    if (window[key]) {
+      try { window[key](); } catch {}
+    }
+
     const state = {
       tipo: "visa",
       origen: "es",
       destino: "en",
       paginas: 1,
       express: false,
-      sello: false,
       nombre: "",
-      fechaLimite: "",
       aceptaEstimado: false,
     };
 
     const PRICE_CONFIG = {
       basePorHoja: {
-        es: {
-          en: 20,
-          fr: 20,
-          it: 20,
-          zh: 30,
-        },
+        es: { en: 20, fr: 20, it: 20, zh: 30 },
         otros: 30,
       },
       recargoExpress: 0.2,
       iva: 0.13,
       descuentos: {
-        cincoHojas: 0.1,
-        diezHojas: 0.15,
+        cincoHojas: 0.1, // 10%
+        diezHojas: 0.15, // 15%
       },
     };
 
+    // Inputs
     const tipoDocEl = document.querySelector("#tipo-doc");
     const idiomaOrigenEl = document.querySelector("#idioma-origen");
     const idiomaDestinoEl = document.querySelector("#idioma-destino");
     const paginasEl = document.querySelector("#paginas");
     const menosPaginasEl = document.querySelector("#menos-paginas");
     const masPaginasEl = document.querySelector("#mas-paginas");
-    const fechaLimiteEl = document.querySelector("#fecha-limite");
     const expressEl = document.querySelector("#extra-express");
-    const selloEl = document.querySelector("#extra-sello");
     const nombreEl = document.querySelector("#nombre");
     const aceptaEstimadoEl = document.querySelector("#acepta-estimado");
     const btnWhatsappEl = document.querySelector("#btn-whatsapp");
 
+    // Summary
     const resumenPaginasEl = document.querySelector("#resumen-paginas");
     const resumenIdiomasEl = document.querySelector("#resumen-idiomas");
     const resumenExtrasEl = document.querySelector("#resumen-extras");
@@ -380,24 +379,23 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
     const resumenDescuentoEl = document.querySelector("#resumen-descuento");
     const resumenIvaEl = document.querySelector("#resumen-iva");
 
+    // Si no existe el botón o campos clave, no inicializa
+    if (!btnWhatsappEl || !paginasEl || !nombreEl || !aceptaEstimadoEl) return;
+
     function getIdiomaLabel(code) {
       return i18n?.languageMap?.[code] ?? String(code || "").toUpperCase();
     }
 
     function getSheetUnit(n) {
-      return n === 1 ? i18n.units.sheetSingular : i18n.units.sheetPlural;
+      return n === 1 ? i18n?.units?.sheetSingular ?? "hoja" : i18n?.units?.sheetPlural ?? "hojas";
     }
 
     function calcularPrecioBasePorHoja(origen, destino) {
       if (origen === "es" && destino !== "es") {
-        return (
-          PRICE_CONFIG.basePorHoja.es[destino] ?? PRICE_CONFIG.basePorHoja.otros
-        );
+        return PRICE_CONFIG.basePorHoja.es[destino] ?? PRICE_CONFIG.basePorHoja.otros;
       }
       if (destino === "es" && origen !== "es") {
-        return (
-          PRICE_CONFIG.basePorHoja.es[origen] ?? PRICE_CONFIG.basePorHoja.otros
-        );
+        return PRICE_CONFIG.basePorHoja.es[origen] ?? PRICE_CONFIG.basePorHoja.otros;
       }
       return PRICE_CONFIG.basePorHoja.otros;
     }
@@ -408,60 +406,61 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
 
       let subtotalBase = paginas * basePorHoja;
 
+      // Descuento por volumen (misma lógica que tu versión original)
       let descuento = 0;
       let descuentoPorc = 0;
 
       if (paginas > 10) {
-        descuentoPorc = PRICE_CONFIG.descuentos.diezHojas;
+        descuentoPorc = PRICE_CONFIG.descuentos.diezHojas;   // 15%
       } else if (paginas > 5) {
-        descuentoPorc = PRICE_CONFIG.descuentos.cincoHojas;
+        descuentoPorc = PRICE_CONFIG.descuentos.cincoHojas;  // 10%
       }
 
-      if (descuentoPorc > 0) {
-        descuento = subtotalBase * descuentoPorc;
-      }
+      if (descuentoPorc > 0) descuento = subtotalBase * descuentoPorc;
 
       let subtotalTrasDescuento = subtotalBase - descuento;
 
       const extrasSeleccionados = [];
 
+      // Express (se calcula sobre subtotal tras descuento, como antes)
       if (state.express) {
         const extraExpress = subtotalTrasDescuento * PRICE_CONFIG.recargoExpress;
         subtotalTrasDescuento += extraExpress;
-        extrasSeleccionados.push(i18n.labels.expressExtra);
-      }
-
-      if (state.sello) {
-        extrasSeleccionados.push(i18n.labels.sealExtra);
+        extrasSeleccionados.push(i18n?.labels?.expressExtra ?? "Entrega Express (+20%)");
       }
 
       const iva = subtotalTrasDescuento * PRICE_CONFIG.iva;
       const total = subtotalTrasDescuento + iva;
 
+      // Pintar números
       if (resumenSubtotalEl) resumenSubtotalEl.textContent = `$${subtotalBase.toFixed(2)}`;
       if (resumenDescuentoEl) resumenDescuentoEl.textContent = `-$${descuento.toFixed(2)}`;
       if (resumenIvaEl) resumenIvaEl.textContent = `$${iva.toFixed(2)}`;
+      if (resumenTotalEl) resumenTotalEl.textContent = `$${total.toFixed(2)}`;
 
-      if (resumenPaginasEl) {
-        resumenPaginasEl.textContent = `${paginas} ${getSheetUnit(paginas)}`;
-      }
-
+      // Páginas / idiomas / extras
+      if (resumenPaginasEl) resumenPaginasEl.textContent = `${paginas} ${getSheetUnit(paginas)}`;
       if (resumenIdiomasEl) {
         resumenIdiomasEl.textContent = `${getIdiomaLabel(state.origen)} → ${getIdiomaLabel(state.destino)}`;
       }
 
       if (resumenExtrasEl) {
         resumenExtrasEl.textContent =
-          extrasSeleccionados.length === 0 ? i18n.labels.noExtras : extrasSeleccionados.join(" · ");
+          extrasSeleccionados.length === 0
+            ? (i18n?.labels?.noExtras ?? "Sin extras")
+            : extrasSeleccionados.join(" · ");
       }
 
+      // Detalle base + badge descuento (igual a tu estilo)
       const unit = getSheetUnit(paginas);
-      const detalleBase = `${paginas} ${unit} × $${basePorHoja.toFixed(2)} (${i18n.labels.noVat})`;
+      const detalleBase = `${paginas} ${unit} × $${basePorHoja.toFixed(2)} (${i18n?.labels?.noVat ?? "sin IVA"})`;
 
       if (resumenDetalleEl) {
         if (descuentoPorc > 0) {
           const porcentajeLabel =
-            descuentoPorc === 0.15 ? i18n.labels.volumeDiscount15 : i18n.labels.volumeDiscount10;
+            descuentoPorc === 0.15
+              ? (i18n?.labels?.volumeDiscount15 ?? "15%")
+              : (i18n?.labels?.volumeDiscount10 ?? "10%");
 
           resumenDetalleEl.innerHTML = `
             ${detalleBase}<br />
@@ -470,7 +469,7 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
                      bg-emerald-50 text-emerald-700 px-2 py-0.5
                      text-[0.7rem] font-semibold"
             >
-              ${i18n.labels.volumeDiscountApplied}: ${porcentajeLabel}
+              ${i18n?.labels?.volumeDiscountApplied ?? "Descuento por volumen aplicado"}: ${porcentajeLabel}
             </span>
           `;
         } else {
@@ -478,12 +477,14 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
         }
       }
 
-      if (resumenTotalEl) resumenTotalEl.textContent = `$${total.toFixed(2)}`;
-      if (btnWhatsappEl) btnWhatsappEl.disabled = !state.aceptaEstimado || !state.nombre.trim();
+      // Habilitar botón (nombre + checkbox)
+      btnWhatsappEl.disabled = !(state.aceptaEstimado && state.nombre.trim().length > 0);
     }
 
+    // --- listeners ---
     tipoDocEl?.addEventListener("change", () => {
       state.tipo = tipoDocEl.value;
+      actualizarResumen();
     });
 
     idiomaOrigenEl?.addEventListener("change", () => {
@@ -515,17 +516,8 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
       actualizarResumen();
     });
 
-    fechaLimiteEl?.addEventListener("change", () => {
-      state.fechaLimite = fechaLimiteEl.value;
-    });
-
     expressEl?.addEventListener("change", () => {
       state.express = expressEl.checked;
-      actualizarResumen();
-    });
-
-    selloEl?.addEventListener("change", () => {
-      state.sello = selloEl.checked;
       actualizarResumen();
     });
 
@@ -539,25 +531,22 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
       actualizarResumen();
     });
 
+    // WhatsApp
     btnWhatsappEl?.addEventListener("click", () => {
-      if (!state.nombre.trim()) return;
+      if (btnWhatsappEl.disabled) return;
 
       const paginas = Math.max(1, Number(state.paginas) || 1);
       const basePorHoja = calcularPrecioBasePorHoja(state.origen, state.destino);
 
       let subtotalBase = paginas * basePorHoja;
+
       let descuento = 0;
       let descuentoPorc = 0;
 
-      if (paginas > 10) {
-        descuentoPorc = PRICE_CONFIG.descuentos.diezHojas;
-      } else if (paginas > 5) {
-        descuentoPorc = PRICE_CONFIG.descuentos.cincoHojas;
-      }
+      if (paginas > 10) descuentoPorc = PRICE_CONFIG.descuentos.diezHojas;
+      else if (paginas > 5) descuentoPorc = PRICE_CONFIG.descuentos.cincoHojas;
 
-      if (descuentoPorc > 0) {
-        descuento = subtotalBase * descuentoPorc;
-      }
+      if (descuentoPorc > 0) descuento = subtotalBase * descuentoPorc;
 
       let subtotalTrasDescuento = subtotalBase - descuento;
 
@@ -565,11 +554,7 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
       if (state.express) {
         const extraExpress = subtotalTrasDescuento * PRICE_CONFIG.recargoExpress;
         subtotalTrasDescuento += extraExpress;
-        extras.push(i18n.labels.expressExtra);
-      }
-
-      if (state.sello) {
-        extras.push(i18n.labels.sealExtra);
+        extras.push(i18n?.labels?.expressExtra ?? "Entrega Express (+20%)");
       }
 
       const iva = subtotalTrasDescuento * PRICE_CONFIG.iva;
@@ -579,42 +564,57 @@ const languageValues = ["es", "en", "fr", "it", "zh"] as const;
       const numeroWhatsapp = "50372356914";
 
       const porcentajeLabel =
-        descuentoPorc === 0.15 ? i18n.labels.volumeDiscount15 : i18n.labels.volumeDiscount10;
+        descuentoPorc === 0.15 ? (i18n?.labels?.volumeDiscount15 ?? "15%") : (i18n?.labels?.volumeDiscount10 ?? "10%");
 
       const descuentoLinea =
         descuentoPorc > 0
-          ? `- ${i18n.whatsapp.fields.discountByVolume}: ${porcentajeLabel} → -$${descuento.toFixed(2)} USD\n`
+          ? `- ${(i18n?.whatsapp?.fields?.discountByVolume ?? "Descuento por volumen")}: ${porcentajeLabel} → -$${descuento.toFixed(2)} USD\n`
           : "";
 
-      const extrasLinea = extras.length > 0 ? extras.join(", ") : i18n.labels.noExtras;
-      const deadlineText = state.fechaLimite || i18n.whatsapp.fields.deadlineNotSpecified;
-
-      const docTypeLabel = i18n.whatsapp.docTypes?.[state.tipo] ?? state.tipo;
+      const extrasLinea = extras.length > 0 ? extras.join(", ") : (i18n?.labels?.noExtras ?? "Sin extras");
+      const docTypeLabel = i18n?.whatsapp?.docTypes?.[state.tipo] ?? state.tipo;
 
       const texto = `
-${i18n.whatsapp.greeting.replace("{name}", state.nombre)}
+${(i18n?.whatsapp?.greeting ?? "Hola, mi nombre es {name} y me gustaría cotizar una traducción.").replace("{name}", state.nombre)}
 
-${i18n.whatsapp.docDataTitle}
-- ${i18n.whatsapp.fields.docType}: ${docTypeLabel}
-- ${i18n.whatsapp.fields.languages}: ${idiomaTexto}
-- ${i18n.whatsapp.fields.sheets}: ${paginas}
+${i18n?.whatsapp?.docDataTitle ?? "Datos del documento:"}
+- ${(i18n?.whatsapp?.fields?.docType ?? "Tipo de documento")}: ${docTypeLabel}
+- ${(i18n?.whatsapp?.fields?.languages ?? "Idiomas")}: ${idiomaTexto}
+- ${(i18n?.whatsapp?.fields?.sheets ?? "Número de hojas")}: ${paginas}
 
-${i18n.whatsapp.quoteDetailTitle}
-- ${i18n.whatsapp.fields.baseSubtotal}: $${subtotalBase.toFixed(2)} USD
-${descuentoLinea}- ${i18n.whatsapp.fields.subtotalAfter}: $${subtotalTrasDescuento.toFixed(2)} USD
-- ${i18n.whatsapp.fields.vat}: $${iva.toFixed(2)} USD
-- ${i18n.whatsapp.fields.total}: $${total.toFixed(2)} USD
+${i18n?.whatsapp?.quoteDetailTitle ?? "Detalle de la cotización:"}
+- ${(i18n?.whatsapp?.fields?.baseSubtotal ?? "Subtotal base")}: $${subtotalBase.toFixed(2)} USD
+${descuentoLinea}- ${(i18n?.whatsapp?.fields?.subtotalAfter ?? "Subtotal tras descuento y extras")}: $${subtotalTrasDescuento.toFixed(2)} USD
+- ${(i18n?.whatsapp?.fields?.vat ?? "IVA (13%)")}: $${iva.toFixed(2)} USD
+- ${(i18n?.whatsapp?.fields?.total ?? "Total estimado")}: $${total.toFixed(2)} USD
 
-${i18n.whatsapp.fields.extras}: ${extrasLinea}
-${i18n.whatsapp.fields.deadline}: ${deadlineText}
+${(i18n?.whatsapp?.fields?.extras ?? "Extras seleccionados")}: ${extrasLinea}
 
-${i18n.whatsapp.understandEstimate}
+${i18n?.whatsapp?.understandEstimate ?? "Entiendo que este precio es solo una estimación y puede cambiar después de que revisen el documento."}
       `.trim();
 
       const url = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(texto)}`;
-      window.open(url, "_blank");
+      window.open(url, "_blank", "noopener,noreferrer");
     });
 
+    // Estado inicial desde el DOM (para que coincida con selects)
+    state.tipo = tipoDocEl?.value || "visa";
+    state.origen = idiomaOrigenEl?.value || "es";
+    state.destino = idiomaDestinoEl?.value || "en";
+    state.paginas = paginasEl.value || "1";
+    state.express = !!expressEl?.checked;
+    state.nombre = nombreEl.value || "";
+    state.aceptaEstimado = !!aceptaEstimadoEl.checked;
+
     actualizarResumen();
-  }
+
+    // Guardamos cleanup para futuros init
+    window[key] = () => {
+      // si quisieras limpiar intervalos o listeners globales, aquí
+    };
+  };
+
+  document.addEventListener("DOMContentLoaded", initQuoteForm);
+  document.addEventListener("astro:page-load", initQuoteForm);
 </script>
+

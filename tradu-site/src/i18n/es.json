@@ -205,7 +205,7 @@
     "linkHome": "Inicio",
     "linkServices": "Servicios",
     "linkAbout": "Sobre nosotros",
-    "linkContact": "Contacto",
+    "linkContact": "Cotizaciones",
     "linkTerms": "Términos y condiciones",
     "contactTitle": "Contacto",
     "contactPhoneLabel": "Teléfono",
@@ -444,5 +444,34 @@
         }
       ]
     }
+  },
+
+  "testimonials": {
+    "eyebrow": "Opiniones verificadas",
+    "title": "Lo que nuestros clientes dicen sobre nuestras traducciones",
+    "subtitle": "Más de 1,000 documentos traducidos y aceptados por universidades, embajadas y entidades legales. La precisión, rapidez y confiabilidad son lo que más destacan nuestros clientes.",
+    "indicatorAria": "Ver testimonio {n}",
+    "items": [
+      {
+        "name": "Juan M.",
+        "role": "Estudiante becado",
+        "text": "Me entregaron la traducción súper rápido y sin errores. Pude enviar mis documentos a tiempo para la beca."
+      },
+      {
+        "name": "María P.",
+        "role": "Trámite de visa Reino Unido",
+        "text": "La embajada de Inglaterra aceptó mis documentos sin ningún problema. El proceso fue claro y profesional."
+      },
+      {
+        "name": "Carlos R.",
+        "role": "Documentos corporativos",
+        "text": "Traducción muy cuidadosa con los términos legales. Se nota que está revisado por profesionales."
+      },
+      {
+        "name": "Sofía L.",
+        "role": "Aplicación a maestría",
+        "text": "Usé sus traducciones para un posgrado en el extranjero. Todo llegó a tiempo y con los sellos requeridos."
+      }
+    ]
   }
 }
