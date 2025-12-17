@@ -27,8 +27,8 @@ jobs:
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}      # p.ej. traduflashsv.com
+          username: ${{ secrets.FTP_USERNAME }}  # p.ej. u612780144
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: tradu-site/dist/
-          server-dir: domains/traduflashsv.com/public_html/
+          server-dir: /domains/traduflashsv.com/public_html/
