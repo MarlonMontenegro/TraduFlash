@@ -23,11 +23,11 @@ jobs:
         run: npm run build
         working-directory: tradu-site
 
-      - name: Deploy to Hostinger via FTP
+       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: tradu-site/dist/
-          server-dir: /public_html/
+          server-dir: domains/traduflashsv.com/public_html/
