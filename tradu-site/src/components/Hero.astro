@@ -11,13 +11,57 @@ interface HeroCopy {
   check2?: string;
 }
 
+type HeroCta = {
+  label: string;
+  href: string;
+  kind?: "internal" | "external";
+  variant?: "primary" | "secondary";
+  icon?: "whatsapp" | "none";
+};
+
 interface Props {
   copy: HeroCopy;
   imageSrc: ImageMetadata;
   imageAlt: string;
+
+  // 0, 1 o 2 botones
+  ctas?: HeroCta[];
 }
 
-const { copy, imageSrc, imageAlt } = Astro.props;
+const { copy, imageSrc, imageAlt, ctas } = Astro.props;
+
+// Default: si no envías ctas, se mantiene el WhatsApp como hoy
+const defaultCtas: HeroCta[] = [
+  {
+    label: copy.cta,
+    href: "https://wa.me/50372356914",
+    kind: "external",
+    variant: "secondary",
+    icon: "whatsapp",
+  },
+];
+
+const safeCtas = (ctas && ctas.length ? ctas : defaultCtas).slice(0, 2);
+
+const getBtnClasses = (variant: HeroCta["variant"]) => {
+  const base =
+    "inline-flex items-center gap-2 px-10 py-3.5 rounded-full text-sm md:text-base font-semibold transition-transform duration-200 ease-out hover:scale-[1.04] active:scale-[0.98]";
+
+  const primary =
+    "bg-[var(--brand-primary)] text-white shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2";
+
+  const secondary =
+    "border-2 border-[#25D366] text-[#25D366] bg-white hover:bg-[#25D366]/10 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2";
+
+  return `${base} ${variant === "secondary" ? secondary : primary}`;
+};
+
+const getLinkAttrs = (kind: HeroCta["kind"]) => {
+  if (kind === "external") {
+    return { target: "_blank", rel: "noopener noreferrer" };
+  }
+  return {};
+};
 ---
 
 <style is:global>
@@ -58,29 +102,22 @@ const { copy, imageSrc, imageAlt } = Astro.props;
 </style>
 
 <section
-  class="relative py-20 md:py-28 px-4
-         bg-[var(--background-color)] overflow-hidden"
+  class="relative py-20 md:py-28 px-4 bg-[var(--background-color)] overflow-hidden"
 >
   <!-- BG DOTS -->
   <div
-    class="absolute inset-0 z-0
-           [background-size:18px_18px]
+    class="absolute inset-0 z-0 [background-size:18px_18px]
            [background-image:radial-gradient(#d8d8d8_1px,transparent_1px)]
            opacity-60"
   ></div>
 
   <!-- CONTENEDOR -->
   <div
-    class="relative z-10 max-w-6xl mx-auto
-           flex flex-col lg:flex-row
-           items-center gap-10 lg:gap-16"
+    class="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-16"
   >
     <!-- TEXTO -->
     <div
-      class="w-full lg:w-[55%]
-             text-center lg:text-left
-             max-w-xl lg:max-w-2xl mx-auto
-             hero-fade-up"
+      class="w-full lg:w-[55%] text-center lg:text-left max-w-xl lg:max-w-2xl mx-auto hero-fade-up"
     >
       <h1
         class="text-[2.4rem] md:text-[3.3rem] lg:text-[3.2rem]
@@ -97,44 +134,39 @@ const { copy, imageSrc, imageAlt } = Astro.props;
       </h1>
 
       <p
-        class="mt-6 text-[1rem] md:text-[1.15rem]
-               text-slate-700 leading-[1.65]
+        class="mt-6 text-[1rem] md:text-[1.15rem] text-slate-700 leading-[1.65]
                max-w-lg mx-auto lg:mx-0"
       >
         {copy.subtitle}
       </p>
 
-<div class="mt-9 flex justify-center lg:justify-start">
-  <a
-    href="https://wa.me/50372356914"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="inline-flex items-center gap-2 px-10 py-3.5
-           rounded-full text-sm md:text-base font-semibold
-           bg-[#25D366] text-white
-           transition-transform duration-200 ease-out
-           hover:scale-[1.04]
-           active:scale-[0.98]"
-  >
-    <MessageCircle class="h-5 w-5" />
-    <span>{copy.cta}</span>
-  </a>
-</div>
+      <!-- BOTONES (0, 1 o 2) -->
+      {safeCtas.length > 0 && (
+        <div class="mt-9 flex flex-wrap gap-3 justify-center lg:justify-start">
+          {safeCtas.map((cta) => {
+            const attrs = getLinkAttrs(cta.kind);
+            const classes = getBtnClasses(cta.variant ?? "primary");
 
+            return (
+              <a href={cta.href} class={classes} {...attrs}>
+                {cta.icon === "whatsapp" && <MessageCircle class="h-5 w-5" />}
+                <span>{cta.label}</span>
+              </a>
+            );
+          })}
+        </div>
+      )}
 
       {(copy.check1 || copy.check2) && (
         <div
-          class="mt-8 flex flex-col md:flex-row gap-3 md:gap-4
-                 justify-center lg:justify-start items-center"
+          class="mt-8 flex flex-col md:flex-row gap-3 md:gap-4 justify-center lg:justify-start items-center"
         >
           {copy.check1 && (
             <div
-              class="inline-flex items-center gap-2 rounded-full px-4 py-2
-                     bg-[var(--brand-primary)]/10"
+              class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-[var(--brand-primary)]/10"
             >
               <span
-                class="flex items-center justify-center w-5 h-5 rounded-full
-                       bg-[var(--brand-blue)] text-white text-xs"
+                class="flex items-center justify-center w-5 h-5 rounded-full bg-[var(--brand-blue)] text-white text-xs"
               >
                 ✔
               </span>
@@ -146,12 +178,10 @@ const { copy, imageSrc, imageAlt } = Astro.props;
 
           {copy.check2 && (
             <div
-              class="inline-flex items-center gap-2 rounded-full px-4 py-2
-                     bg-[var(--brand-primary)]/10"
+              class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-[var(--brand-primary)]/10"
             >
               <span
-                class="flex items-center justify-center w-5 h-5 rounded-full
-                       bg-[var(--brand-blue)] text-white text-xs"
+                class="flex items-center justify-center w-5 h-5 rounded-full bg-[var(--brand-blue)] text-white text-xs"
               >
                 ✔
               </span>
@@ -167,9 +197,7 @@ const { copy, imageSrc, imageAlt } = Astro.props;
     <!-- IMAGEN -->
     <div class="w-full lg:w-1/2 flex justify-center lg:justify-end hero-fade-img">
       <div
-        class="relative w-full max-w-2xl
-               rounded-3xl bg-white shadow-xl border border-slate-200
-               overflow-hidden"
+        class="relative w-full max-w-2xl rounded-3xl bg-white shadow-xl border border-slate-200 overflow-hidden"
       >
         <Image
           src={imageSrc}
