@@ -66,6 +66,22 @@ const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMZH030XJ1"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMZH030XJ1"></script>
+<script is:inline>
+  // Tipado mínimo para que TypeScript no marque error en archivos .astro
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ window.dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-YMZH03OXJ1');
+</script>
+
+
+
   </head>
 
   <body class="bg-[var(--background-color)] font-sans text-slate-900">
