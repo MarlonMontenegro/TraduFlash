@@ -13,7 +13,8 @@ const {
 } = Astro.props;
 
 const siteUrl = "https://traduflashsv.com";
-const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
+const normalizePath = (p: string) => (p.endsWith("/") ? p : `${p}/`);
+const canonicalUrl = canonical ?? `${siteUrl}${normalizePath(Astro.url.pathname)}`;
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -31,6 +32,24 @@ const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
     <!-- SEO -->
     <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
+
+    <!-- Hreflang -->
+{(() => {
+  const stripLang = (p: string) => p.replace(/^\/(es|en)(\/|$)/, "/");
+  const basePath = stripLang(Astro.url.pathname);
+  const path = basePath.endsWith("/") ? basePath : `${basePath}/`;
+
+  const esUrl = `${siteUrl}/es${path === "/" ? "/" : path}`;
+  const enUrl = `${siteUrl}/en${path === "/" ? "/" : path}`;
+
+  return (
+    <>
+      <link rel="alternate" hreflang="es-SV" href={esUrl} />
+      <link rel="alternate" hreflang="en-US" href={enUrl} />
+      <link rel="alternate" hreflang="x-default" href={esUrl} />
+    </>
+  );
+})()}
 
     <!-- Open Graph (WhatsApp / Facebook) -->
     <meta property="og:type" content="website" />
