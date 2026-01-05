@@ -1,0 +1,52 @@
+---
+import { ROUTES_MAP, SITE_URL, type Lang } from "../i18n/routes";
+
+const {
+  lang,
+  title,
+  description,
+  noindex = false,
+  canonical, // opcional si quieres forzar uno
+  canonicalMode = "self" as "self" | "es-primary",
+} = Astro.props as {
+  lang: Lang;
+  title: string;
+  description?: string;
+  noindex?: boolean;
+  canonical?: string;
+  canonicalMode?: "self" | "es-primary";
+};
+
+const normalize = (p: string) => (p.endsWith("/") ? p : `${p}/`);
+const pathname = normalize(Astro.url.pathname);
+
+// ruta base sin prefijo /es o /en
+const basePath = normalize(pathname.replace(/^\/(es|en)(\/|$)/, "/"));
+
+// Busca equivalencias
+const pair = ROUTES_MAP[basePath];
+
+// Si no existe en el map, hacemos fallback “mecánico”
+const esPath = pair?.es ?? `/es${basePath === "/" ? "/" : basePath}`;
+const enPath = pair?.en ?? `/en${basePath === "/" ? "/" : basePath}`;
+
+const esUrl = `${SITE_URL}${esPath}`;
+const enUrl = `${SITE_URL}${enPath}`;
+
+// Canonical:
+const canonicalUrl =
+  canonical ??
+  (canonicalMode === "es-primary"
+    ? esUrl
+    : (lang === "es" ? esUrl : enUrl));
+---
+
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
+
+<link rel="alternate" hreflang="es-SV" href={esUrl} />
+<link rel="alternate" hreflang="en-US" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={esUrl} />
