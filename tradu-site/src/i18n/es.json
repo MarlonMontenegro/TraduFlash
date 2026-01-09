@@ -1,13 +1,13 @@
 {
   "navbar": {
-    "about": "Inicio",
-    "contact": "Sobre Nosotros",
-    "button": "Obtén tu cotización",
+    "home": "Inicio",
+    "about": "Sobre nosotros",
+    "documents": "Traducción de documentos",
     "services": "Servicios",
     "liveTranslations": "Traducciones en vivo",
-    "websiteTranslations": "Traducciones de páginas web"
+    "websiteTranslations": "Traducciones de páginas web",
+    "button": "Obtén tu cotización"
   },
-
   "hero": {
     "titleLine1": "Traducciones de Documentos Legales",
     "titleLine2": "en El Salvador",
@@ -445,7 +445,6 @@
       ]
     }
   },
-
   "testimonials": {
     "eyebrow": "Opiniones verificadas",
     "title": "Lo que nuestros clientes dicen sobre nuestras traducciones",
@@ -473,5 +472,59 @@
         "text": "Usé sus traducciones para un posgrado en el extranjero. Todo llegó a tiempo y con los sellos requeridos."
       }
     ]
+  },
+  "documents": {
+    "hero": {
+      "titleLine1": "Traducciones de Documentos Legales",
+      "titleLine2": "en El Salvador",
+      "subtitle": "Traducciones legales, académicas y migratorias del español al inglés y del inglés al español, con confidencialidad y entregas puntuales.",
+      "cta": "Cotizar traducción de documentos",
+      "check1": "Español ↔ Inglés",
+      "check2": "Confidencialidad garantizada"
+    },
+    "benefits": {
+      "eyebrow": "Beneficios",
+      "title": "Por qué traducir tus documentos con profesionales",
+      "items": [
+        {
+          "title": "Claridad desde la primera lectura",
+          "description": "Evita errores y malentendidos en documentos importantes para trámites, estudios o trabajo."
+        },
+        {
+          "title": "Revisión y cuidado en cada detalle",
+          "description": "Cada traducción se revisa para mantener sentido, formato y consistencia en todo el documento."
+        },
+        {
+          "title": "Acompañamiento durante el proceso",
+          "description": "Si no estás seguro qué necesitas traducir o cómo enviarlo, te orientamos paso a paso."
+        },
+        {
+          "title": "Entrega puntual y segura",
+          "description": "Recibe tu traducción a tiempo y con confidencialidad, lista para presentarla con tranquilidad."
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Cómo funciona",
+      "subtitle": "Un proceso simple y acompañamiento profesional en cada etapa de tu traducción.",
+      "steps": [
+        {
+          "title": "Envíanos tu documento",
+          "description": "Comparte el archivo o fotos claras y cuéntanos el idioma y para qué lo necesitas."
+        },
+        {
+          "title": "Recibe tu cotización",
+          "description": "Te confirmamos precio y tiempo de entrega según el tipo de documento y extensión."
+        },
+        {
+          "title": "Traducción y revisión",
+          "description": "Realizamos la traducción y la revisamos cuidadosamente para asegurar claridad y consistencia."
+        },
+        {
+          "title": "Entrega lista para usar",
+          "description": "Te enviamos el documento final en el formato acordado, con confidencialidad y puntualidad."
+        }
+      ]
+    }
   }
 }

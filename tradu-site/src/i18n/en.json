@@ -1,13 +1,13 @@
 {
   "navbar": {
-    "about": "Home",
-    "contact": "About Us",
-    "button": "Get a Quote",
+    "home": "Home",
+    "about": "About us",
+    "documents": "Document translation",
     "services": "Services",
-    "liveTranslations": "Live Translations",
-    "websiteTranslations": "Website Translations"
+    "liveTranslations": "Live interpretation",
+    "websiteTranslations": "Website translation",
+    "button": "Get a quote"
   },
-
   "hero": {
     "titleLine1": "Legal Document Translations",
     "titleLine2": "in El Salvador",
@@ -544,5 +544,59 @@
         "text": "I used their translations for a graduate program abroad. Everything arrived on time and with the required seals."
       }
     ]
+  },
+  "documents": {
+    "hero": {
+      "titleLine1": "Legal Document Translation",
+      "titleLine2": "in El Salvador",
+      "subtitle": "Legal, academic, and immigration document translations from Spanish to English and English to Spanish, with confidentiality and on-time delivery.",
+      "cta": "Get a document translation quote",
+      "check1": "Spanish ↔ English",
+      "check2": "Guaranteed confidentiality"
+    },
+    "benefits": {
+      "eyebrow": "Benefits",
+      "title": "Why translate your documents with professionals",
+      "items": [
+        {
+          "title": "Clear from the first read",
+          "description": "Avoid mistakes and misunderstandings in important documents for immigration, studies, or work."
+        },
+        {
+          "title": "Careful review in every detail",
+          "description": "Each translation is reviewed to preserve meaning, format, and consistency throughout the document."
+        },
+        {
+          "title": "Guidance throughout the process",
+          "description": "If you're unsure what needs to be translated or how to send it, we guide you step by step."
+        },
+        {
+          "title": "On-time and secure delivery",
+          "description": "Receive your translation on time and with full confidentiality, ready to submit with confidence."
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "A simple process with professional guidance at every stage of your translation.",
+      "steps": [
+        {
+          "title": "Send us your document",
+          "description": "Share the file or clear photos and tell us the language pair and purpose."
+        },
+        {
+          "title": "Receive your quote",
+          "description": "We confirm the price and delivery time based on the document type and length."
+        },
+        {
+          "title": "Translation and review",
+          "description": "We translate and carefully review the document to ensure clarity and consistency."
+        },
+        {
+          "title": "Ready-to-use delivery",
+          "description": "We send you the final document in the agreed format, with confidentiality and punctual delivery."
+        }
+      ]
+    }
   }
 }

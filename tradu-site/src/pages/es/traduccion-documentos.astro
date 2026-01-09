@@ -1,0 +1,47 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Cta from "../../components/CallToAction.astro";
+import HowItWorks from "../../components/HowItWorks.astro";
+import Benefits from "../../components/Benefits.astro"
+import ServiceLanguagesSection from "../../components/ServiceLanguages.astro";
+import es from "../../i18n/es.json";
+
+const lang = "es";
+const t = es;
+
+import heroDocuments from "../../assets/hero/hero-documents.jpg";
+import ctaLiveBg from "../../assets/cta/cta-1.jpg";
+import documentsBenefits from "../../assets/benefits/documents-benefits.jpg";
+
+---
+
+<Layout
+  title="Traducciones de documentos | TraduFlash"
+  description="Servicio de traducción e interpretación en vivo para eventos, reuniones y conferencias. Intérpretes profesionales en español e inglés."
+  lang={lang}
+  canonical="https://traduflashsv.com/es/traduccion-documentos"
+  t={t}
+>
+  <Hero
+    copy={t.documents.hero}
+    imageSrc={heroDocuments}
+    imageAlt="Traducción e interpretación en vivo"
+  />
+
+
+
+<Benefits
+  eyebrow={t.documents.benefits.eyebrow}
+  title={t.documents.benefits.title}
+  items={t.documents.benefits.items}
+  imageSrc={documentsBenefits}
+  imageAlt="Beneficios de traducción de documentos"
+/>
+
+
+  
+  <HowItWorks  copy={t.documents.howItWorks} />
+
+
+</Layout>

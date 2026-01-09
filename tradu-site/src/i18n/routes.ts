@@ -4,7 +4,6 @@ export const SITE_URL = "https://traduflashsv.com";
 
 /**
  * Mapa de rutas equivalentes por idioma.
- * Clave = "ruta base" (sin /es o /en), SIEMPRE con trailing slash.
  */
 export const ROUTES_MAP: Record<string, { es: string; en: string }> = {
   "/": { es: "/es/", en: "/en/" },
@@ -17,6 +16,11 @@ export const ROUTES_MAP: Record<string, { es: string; en: string }> = {
   "/traduccion-paginas-web/": {
     es: "/es/traduccion-paginas-web/",
     en: "/en/website-translation/",
+  },
+
+  "/traduccion-documentos/": {
+    es: "/es/traduccion-documentos/",
+    en: "/en/documents-translation/",
   },
 
   "/sobre-nosotros/": {

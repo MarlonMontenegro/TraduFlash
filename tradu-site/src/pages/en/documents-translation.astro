@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import HowItWorks from "../../components/HowItWorks.astro";
+import Benefits from "../../components/Benefits.astro";
+import en from "../../i18n/en.json";
+
+const lang = "en";
+const t = en;
+
+import heroDocuments from "../../assets/hero/hero-documents.jpg";
+import documentsBenefits from "../../assets/benefits/documents-benefits.jpg";
+---
+
+<Layout
+  title="Document Translation Services | TraduFlash"
+  description="Professional legal, academic, and immigration document translation services between Spanish and English."
+  lang={lang}
+  canonical="https://traduflashsv.com/en/documents-translation"
+  t={t}
+>
+  <Hero
+    copy={t.documents.hero}
+    imageSrc={heroDocuments}
+    imageAlt="Professional document translation services"
+  />
+
+  <Benefits
+    eyebrow={t.documents.benefits.eyebrow}
+    title={t.documents.benefits.title}
+    items={t.documents.benefits.items}
+    imageSrc={documentsBenefits}
+    imageAlt="Benefits of professional document translation"
+  />
+
+  <HowItWorks copy={t.documents.howItWorks} />
+</Layout>
+ 

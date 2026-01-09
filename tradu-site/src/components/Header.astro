@@ -8,37 +8,43 @@ interface Props {
 
 const { lang, t } = Astro.props;
 
+// helper: siempre con trailing slash
+const withSlash = (p: string) => (p.endsWith("/") ? p : `${p}/`);
+
 const routes = {
-  home: lang === "es" ? "/es" : "/en",
-  live: lang === "es" ? "/es/traducciones-en-vivo" : "/en/live-translation",
-  web: lang === "es" ? "/es/traduccion-paginas-web" : "/en/website-translation",
-  about: lang === "es" ? "/es/sobre-nosotros" : "/en/about-us",
-  quote: lang === "es" ? "/es/cotizacion" : "/en/quote",
+  home: lang === "es" ? "/es/" : "/en/",
+  live: lang === "es" ? "/es/traducciones-en-vivo/" : "/en/live-translation/",
+  web: lang === "es" ? "/es/traduccion-paginas-web/" : "/en/website-translation/",
+  about: lang === "es" ? "/es/sobre-nosotros/" : "/en/about-us/",
+  quote: lang === "es" ? "/es/cotizacion/" : "/en/quote/",
+  documents: lang === "es" ? "/es/traduccion-documentos/" : "/en/documents-translation/",
 };
 
-const path = Astro.url.pathname;
+const path = withSlash(Astro.url.pathname);
 
 const switchMap: Record<string, string> = {
-  "/es": "/en",
-  "/en": "/es",
+  "/es/": "/en/",
+  "/en/": "/es/",
 
-  "/es/cotizacion": "/en/quote",
-  "/en/quote": "/es/cotizacion",
+  "/es/cotizacion/": "/en/quote/",
+  "/en/quote/": "/es/cotizacion/",
 
-  "/es/sobre-nosotros": "/en/about-us",
-  "/en/about-us": "/es/sobre-nosotros",
+  "/es/sobre-nosotros/": "/en/about-us/",
+  "/en/about-us/": "/es/sobre-nosotros/",
 
-  "/es/traducciones-en-vivo": "/en/live-translation",
-  "/en/live-translation": "/es/traducciones-en-vivo",
+  "/es/traducciones-en-vivo/": "/en/live-translation/",
+  "/en/live-translation/": "/es/traducciones-en-vivo/",
 
-  "/es/traduccion-paginas-web": "/en/website-translation",
-  "/en/website-translation": "/es/traduccion-paginas-web",
+  "/es/traduccion-paginas-web/": "/en/website-translation/",
+  "/en/website-translation/": "/es/traduccion-paginas-web/",
+
+  "/es/traduccion-documentos/": "/en/documents-translation/",
+  "/en/documents-translation/": "/es/traduccion-documentos/",
 };
 
-const enHref = lang === "en" ? path : (switchMap[path] || "/en");
-const esHref = lang === "es" ? path : (switchMap[path] || "/es");
+const enHref = lang === "en" ? path : (switchMap[path] || "/en/");
+const esHref = lang === "es" ? path : (switchMap[path] || "/es/");
 ---
-
 <div
   x-data="{ open: false, servicesOpen: false }"
   x-effect="document.documentElement.style.overflow = open ? 'hidden' : ''"
@@ -62,7 +68,7 @@ const esHref = lang === "es" ? path : (switchMap[path] || "/es");
         <ul class="flex gap-12 text-lg font-medium text-[var(--brand-black)]">
           <li>
             <a href={routes.home} class="hover:text-[var(--brand-primary)] transition">
-              {t.navbar.about}
+              {t.navbar.home}
             </a>
           </li>
 
@@ -89,12 +95,15 @@ const esHref = lang === "es" ? path : (switchMap[path] || "/es");
               <a href={routes.web} class="block px-4 py-2.5 text-sm text-[var(--brand-black)] hover:bg-black/5">
                 {t.navbar.websiteTranslations}
               </a>
+              <a href={routes.documents} class="block px-4 py-2.5 text-sm text-[var(--brand-black)] hover:bg-black/5">
+                {t.navbar.documents}
+              </a>
             </div>
           </li>
 
           <li>
             <a href={routes.about} class="hover:text-[var(--brand-primary)] transition">
-              {t.navbar.contact}
+              {t.navbar.about}
             </a>
           </li>
         </ul>
